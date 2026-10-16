@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "brand": "Груз в пути",
+  "pack_title": "Груз в пути — хаски",
+  "kind": "static",
+  "size": {
+    "width": 512,
+    "height": 512
+  },
+  "stickers": [
+    {
+      "id": "01-on-the-way",
+      "caption": "Уже в пути!",
+      "emoji": "🚚",
+      "png": "png/01-on-the-way.png",
+      "webp": "webp/01-on-the-way.webp"
+    },
+    {
+      "id": "02-picked-up",
+      "caption": "Забрал!",
+      "emoji": "📦",
+      "png": "png/02-picked-up.png",
+      "webp": "webp/02-picked-up.webp"
+    },
+    {
+      "id": "03-delivered",
+      "caption": "Доставлено!",
+      "emoji": "✅",
+      "png": "png/03-delivered.png",
+      "webp": "webp/03-delivered.webp"
+    },
+    {
+      "id": "04-in-touch",
+      "caption": "На связи",
+      "emoji": "📞",
+      "png": "png/04-in-touch.png",
+      "webp": "webp/04-in-touch.webp"
+    },
+    {
+      "id": "05-thanks",
+      "caption": "Спасибо!",
+      "emoji": "💙",
+      "png": "png/05-thanks.png",
+      "webp": "webp/05-thanks.webp"
+    },
+    {
+      "id": "06-checking",
+      "caption": "Сейчас проверю",
+      "emoji": "🔎",
+      "png": "png/06-checking.png",
+      "webp": "webp/06-checking.webp"
+    }
+  ]
+}

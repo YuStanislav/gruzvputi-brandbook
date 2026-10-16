@@ -1,0 +1,16 @@
+{
+  "background": "#071426",
+  "surface": "#10243D",
+  "surfaceRaised": "#17314F",
+  "text": "#F4F7FC",
+  "textMuted": "#AFBED1",
+  "border": "#68819D",
+  "primary": "#0066FF",
+  "primaryHover": "#0057DB",
+  "onPrimary": "#FFFFFF",
+  "link": "#6BABFF",
+  "focus": "#9BC8FF",
+  "success": "#6DE4A6",
+  "warning": "#FFD08A",
+  "error": "#FF8F89"
+}
