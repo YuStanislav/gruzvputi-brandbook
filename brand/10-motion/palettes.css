@@ -1,0 +1,201 @@
+/*
+ * Five CSS-only palettes for the delivery truck and city scenery.
+ * IDs: brand (Фирменная), ocean (Океан), forest (Тайга),
+ * sunset (Закат), graphite (Графит).
+ * Load after truck.css; set data-palette on .gvp-truck.
+ * White wordmarks retain at least 4.5:1 contrast against --gvp-primary.
+ */
+.gvp-truck[data-palette='brand'] {
+  --gvp-primary: #0066ff;
+  --gvp-deep: #061f4b;
+  --gvp-focus: #6babff;
+  --gvp-on-primary: #ffffff;
+  --gvp-bg: #ffffff;
+  --gvp-ink: #061f4b;
+  --gvp-muted: #52627c;
+  --gvp-line: #dbe4f2;
+  --gvp-scene: #f4f7fc;
+  --gvp-road: #c3d3e9;
+  --gvp-city: #b6ccec;
+  --gvp-city-accent: #87aee0;
+  --gvp-city-window: #e6effb;
+  --gvp-skyline: #e1e9f5;
+  --gvp-river: #d4e7ff;
+  --gvp-verge: #eaf0f9;
+  --gvp-box: #ffffff;
+  --gvp-trim: #061f4b;
+  --gvp-window: #b8d6ff;
+}
+.gvp-truck[data-palette='brand'][data-theme='dark'] {
+  --gvp-bg: #071426;
+  --gvp-ink: #ffffff;
+  --gvp-muted: #b1c2da;
+  --gvp-line: #243a58;
+  --gvp-scene: #0c223e;
+  --gvp-road: #315679;
+  --gvp-city: #315c8b;
+  --gvp-city-accent: #4e7faf;
+  --gvp-city-window: #b1d5ff;
+  --gvp-skyline: #173451;
+  --gvp-river: #123d63;
+  --gvp-verge: #102b46;
+  --gvp-box: #061f4b;
+  --gvp-trim: #6babff;
+  --gvp-window: #b8d6ff;
+}
+
+.gvp-truck[data-palette='ocean'] {
+  --gvp-primary: #00727c;
+  --gvp-deep: #073a48;
+  --gvp-focus: #45b8c4;
+  --gvp-on-primary: #ffffff;
+  --gvp-bg: #ffffff;
+  --gvp-ink: #073a48;
+  --gvp-muted: #46666d;
+  --gvp-line: #d3e5e7;
+  --gvp-scene: #f0f8f9;
+  --gvp-road: #b6d4d9;
+  --gvp-city: #a3cbd1;
+  --gvp-city-accent: #70a8b4;
+  --gvp-city-window: #e3f3f5;
+  --gvp-skyline: #d6e9ec;
+  --gvp-river: #c6e8ee;
+  --gvp-verge: #e0eff1;
+  --gvp-box: #ffffff;
+  --gvp-trim: #073a48;
+  --gvp-window: #b8dce9;
+}
+.gvp-truck[data-palette='ocean'][data-theme='dark'] {
+  --gvp-bg: #071c25;
+  --gvp-ink: #f5fcff;
+  --gvp-muted: #adccd2;
+  --gvp-line: #25464e;
+  --gvp-scene: #0c2d37;
+  --gvp-road: #376774;
+  --gvp-city: #326776;
+  --gvp-city-accent: #5393a0;
+  --gvp-city-window: #b7e5ed;
+  --gvp-skyline: #173f4b;
+  --gvp-river: #105365;
+  --gvp-verge: #113b47;
+  --gvp-box: #073a48;
+  --gvp-trim: #77cbd7;
+  --gvp-window: #b8dce9;
+}
+
+.gvp-truck[data-palette='forest'] {
+  --gvp-primary: #286b48;
+  --gvp-deep: #163c32;
+  --gvp-focus: #76b995;
+  --gvp-on-primary: #ffffff;
+  --gvp-bg: #ffffff;
+  --gvp-ink: #163c32;
+  --gvp-muted: #52685c;
+  --gvp-line: #dae5dd;
+  --gvp-scene: #f2f7f2;
+  --gvp-road: #bdd0c2;
+  --gvp-city: #afcbbb;
+  --gvp-city-accent: #80aa94;
+  --gvp-city-window: #e7f1e9;
+  --gvp-skyline: #dce8df;
+  --gvp-river: #c7e3df;
+  --gvp-verge: #e2ede2;
+  --gvp-box: #ffffff;
+  --gvp-trim: #163c32;
+  --gvp-window: #c1dedc;
+}
+.gvp-truck[data-palette='forest'][data-theme='dark'] {
+  --gvp-bg: #0a1e1c;
+  --gvp-ink: #f4fbf7;
+  --gvp-muted: #b4cdc1;
+  --gvp-line: #2a493e;
+  --gvp-scene: #12342d;
+  --gvp-road: #3e6c59;
+  --gvp-city: #3c6b59;
+  --gvp-city-accent: #64927d;
+  --gvp-city-window: #c7e6d6;
+  --gvp-skyline: #21493b;
+  --gvp-river: #205955;
+  --gvp-verge: #1b4133;
+  --gvp-box: #163c32;
+  --gvp-trim: #9bd2b4;
+  --gvp-window: #c1dedc;
+}
+
+.gvp-truck[data-palette='sunset'] {
+  --gvp-primary: #b84d22;
+  --gvp-deep: #4b2d2c;
+  --gvp-focus: #e6976d;
+  --gvp-on-primary: #ffffff;
+  --gvp-bg: #fffdf9;
+  --gvp-ink: #4b2d2c;
+  --gvp-muted: #7a5a4d;
+  --gvp-line: #eddfd4;
+  --gvp-scene: #fcf3e9;
+  --gvp-road: #dcc5b2;
+  --gvp-city: #d8bba5;
+  --gvp-city-accent: #bd9278;
+  --gvp-city-window: #fff0db;
+  --gvp-skyline: #edddcd;
+  --gvp-river: #d0dce7;
+  --gvp-verge: #f0e3d2;
+  --gvp-box: #ffffff;
+  --gvp-trim: #4b2d2c;
+  --gvp-window: #cbd7ed;
+}
+.gvp-truck[data-palette='sunset'][data-theme='dark'] {
+  --gvp-bg: #211b24;
+  --gvp-ink: #fff7ee;
+  --gvp-muted: #d5bfb5;
+  --gvp-line: #514049;
+  --gvp-scene: #352b37;
+  --gvp-road: #765664;
+  --gvp-city: #795d6a;
+  --gvp-city-accent: #aa7c82;
+  --gvp-city-window: #f4d3ba;
+  --gvp-skyline: #4a3948;
+  --gvp-river: #394c66;
+  --gvp-verge: #443342;
+  --gvp-box: #4b2d2c;
+  --gvp-trim: #f2ae88;
+  --gvp-window: #cbd7ed;
+}
+
+.gvp-truck[data-palette='graphite'] {
+  --gvp-primary: #49556b;
+  --gvp-deep: #202e46;
+  --gvp-focus: #99abc9;
+  --gvp-on-primary: #ffffff;
+  --gvp-bg: #ffffff;
+  --gvp-ink: #202e46;
+  --gvp-muted: #5d6676;
+  --gvp-line: #dfe3eb;
+  --gvp-scene: #f3f5f8;
+  --gvp-road: #c5cdd9;
+  --gvp-city: #b9c3d2;
+  --gvp-city-accent: #929fb4;
+  --gvp-city-window: #e9eef6;
+  --gvp-skyline: #e0e5ed;
+  --gvp-river: #d3e0ef;
+  --gvp-verge: #e7ebf1;
+  --gvp-box: #ffffff;
+  --gvp-trim: #202e46;
+  --gvp-window: #c2d2ee;
+}
+.gvp-truck[data-palette='graphite'][data-theme='dark'] {
+  --gvp-bg: #111923;
+  --gvp-ink: #f5f8ff;
+  --gvp-muted: #bac6d6;
+  --gvp-line: #344153;
+  --gvp-scene: #202c3b;
+  --gvp-road: #526379;
+  --gvp-city: #52667f;
+  --gvp-city-accent: #7e92ac;
+  --gvp-city-window: #d2e1f8;
+  --gvp-skyline: #2f3d50;
+  --gvp-river: #304e6b;
+  --gvp-verge: #2a394b;
+  --gvp-box: #202e46;
+  --gvp-trim: #b6c8e4;
+  --gvp-window: #c2d2ee;
+}

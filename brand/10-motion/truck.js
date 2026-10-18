@@ -8,7 +8,30 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const scenes = window.GVP_CITY_SCENES;
   const picker = document.querySelector('[data-gvp-city]');
+  const palettePicker = document.querySelector('[data-gvp-palette]');
+  const palettes = Object.freeze({ brand: 'Фирменная', ocean: 'Океан', forest: 'Тайга', sunset: 'Закат', graphite: 'Графит' });
   let currentCity = 'moskva';
+  let currentPalette = 'brand';
+
+  const syncShell = () => {
+    const firstCard = cards.find(card => card.isConnected);
+    if (!firstCard) return;
+    const colors = window.getComputedStyle(firstCard);
+    ['bg', 'ink', 'muted', 'line', 'scene', 'primary', 'deep', 'focus', 'city-accent'].forEach(token => {
+      page.style.setProperty(`--gvp-${token}`, colors.getPropertyValue(`--gvp-${token}`));
+    });
+  };
+
+  const setPalette = palette => {
+    if (typeof palette !== 'string' || !Object.prototype.hasOwnProperty.call(palettes, palette)) return false;
+    currentPalette = palette;
+    cards.filter(card => card.isConnected).forEach(card => { card.dataset.palette = palette; });
+    page.dataset.palette = palette;
+    if (palettePicker) palettePicker.value = palette;
+    syncShell();
+    try { window.localStorage.setItem('gvp-truck-palette', palette); } catch (_) { /* Storage optional. */ }
+    return true;
+  };
 
   const setCity = city => {
     if (typeof city !== 'string' || !Object.prototype.hasOwnProperty.call(scenes, city)) return false;
@@ -40,6 +63,7 @@
     if (mascot) mascot.setAttribute('href', `../01-mascot/${theme}/mascot-640.png`);
     const label = card.querySelector('.gvp-truck__variant');
     if (label) label.textContent = theme === 'dark' ? 'Тёмная тема' : 'Светлая тема';
+    if (embedded) syncShell();
   };
 
   const updateButton = (card) => {
@@ -61,14 +85,20 @@
     setTheme(cards[0], query.get('theme') === 'dark' ? 'dark' : 'light');
   }
 
-  let savedCity;
-  try { savedCity = window.localStorage.getItem('gvp-truck-city'); } catch (_) { /* Storage optional. */ }
+  let savedCity, savedPalette;
+  try {
+    savedCity = window.localStorage.getItem('gvp-truck-city');
+    savedPalette = window.localStorage.getItem('gvp-truck-palette');
+  } catch (_) { /* Storage optional. */ }
   if (!setCity(query.get('city')) && !setCity(savedCity)) setCity('moskva');
+  if (!setPalette(query.get('palette')) && !setPalette(savedPalette)) setPalette('brand');
   if (picker) picker.addEventListener('change', () => setCity(picker.value));
-  window.GVPTruck = Object.freeze({ setCity, getCity: () => currentCity });
+  if (palettePicker) palettePicker.addEventListener('change', () => setPalette(palettePicker.value));
+  window.GVPTruck = Object.freeze({ setCity, getCity: () => currentCity, setPalette, getPalette: () => currentPalette });
   window.addEventListener('message', event => {
     if (event.source !== window.parent || !event.data) return;
     if (event.data.type === 'gvp-city') setCity(event.data.city);
+    if (event.data.type === 'gvp-palette') setPalette(event.data.palette);
     if (embedded && event.data.type === 'gvp-theme') setTheme(cards[0], event.data.theme);
   });
 

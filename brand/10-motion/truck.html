@@ -10,11 +10,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <title>Фирменный грузовик · Груз в пути</title>
-  <meta name="description" content="Фирменная CSS-анимация грузовика «Груз в пути» с маскотом-хаски. 17 городов и проезжающие достопримечательности. Светлая и тёмная темы.">
+  <meta name="description" content="Фирменная CSS-анимация грузовика «Груз в пути» с маскотом-хаски. 17 городов, пять цветовых палитр, светлая и тёмная темы.">
   <link rel="icon" href="../03-icons/web/light/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="truck.css?v=scale-1">
+  <link rel="stylesheet" href="truck.css?v=palettes-1">
+  <link rel="stylesheet" href="palettes.css?v=palettes-1">
   <script src="city-landmarks.js?v=cities-2" defer></script>
-  <script src="truck.js?v=cities-2" defer></script>
+  <script src="truck.js?v=palettes-1" defer></script>
 </head>
 <body class="gvp-motion-page">
   <main class="gvp-motion-demo">
@@ -25,29 +26,42 @@
     <div class="gvp-motion-title">
       <p class="gvp-motion-kicker">Айдентика в движении / 10</p>
       <h1 class="gvp-motion-heading">Хаски на борту.<br>Груз в пути.</h1>
-      <p class="gvp-motion-intro">Знакомый грузовичок — в наших цветах и с нашим хаски.<br>Выберите город — и знакомые места появятся по пути.</p>
+      <p class="gvp-motion-intro">Знакомый грузовичок — в наших цветах и с нашим хаски.<br>Выберите город и палитру — и знакомые места появятся по пути.</p>
     </div>
-    <div class="gvp-city-picker">
-      <label for="gvp-city">Город по пути</label>
-      <select id="gvp-city" data-gvp-city>
-        <option value="moskva" selected>Москва</option>
-        <option value="sankt-peterburg">Санкт-Петербург</option>
-        <option value="saratov">Саратов</option>
-        <option value="tyumen">Тюмень</option>
-        <option value="izhevsk">Ижевск</option>
-        <option value="barnaul">Барнаул</option>
-        <option value="ulyanovsk">Ульяновск</option>
-        <option value="irkutsk">Иркутск</option>
-        <option value="yaroslavl">Ярославль</option>
-        <option value="tomsk">Томск</option>
-        <option value="orenburg">Оренбург</option>
-        <option value="kemerovo">Кемерово</option>
-        <option value="ryazan">Рязань</option>
-        <option value="khabarovsk">Хабаровск</option>
-        <option value="kirov">Киров</option>
-        <option value="penza">Пенза</option>
-        <option value="tula">Тула</option>
-      </select>
+    <div class="gvp-motion-controls">
+      <div class="gvp-city-picker">
+        <label for="gvp-city">Город</label>
+        <select id="gvp-city" data-gvp-city>
+          <option value="moskva" selected>Москва</option>
+          <option value="sankt-peterburg">Санкт-Петербург</option>
+          <option value="saratov">Саратов</option>
+          <option value="tyumen">Тюмень</option>
+          <option value="izhevsk">Ижевск</option>
+          <option value="barnaul">Барнаул</option>
+          <option value="ulyanovsk">Ульяновск</option>
+          <option value="irkutsk">Иркутск</option>
+          <option value="yaroslavl">Ярославль</option>
+          <option value="tomsk">Томск</option>
+          <option value="orenburg">Оренбург</option>
+          <option value="kemerovo">Кемерово</option>
+          <option value="ryazan">Рязань</option>
+          <option value="khabarovsk">Хабаровск</option>
+          <option value="kirov">Киров</option>
+          <option value="penza">Пенза</option>
+          <option value="tula">Тула</option>
+        </select>
+      </div>
+      <div class="gvp-city-picker gvp-palette-picker">
+        <label for="gvp-palette">Палитра</label>
+        <select id="gvp-palette" data-gvp-palette>
+          <option value="brand" selected>Фирменная</option>
+          <option value="ocean">Океан</option>
+          <option value="forest">Тайга</option>
+          <option value="sunset">Закат</option>
+          <option value="graphite">Графит</option>
+        </select>
+        <span class="gvp-palette-preview" aria-hidden="true"><i></i><i></i><i></i></span>
+      </div>
     </div>
     <div class="gvp-motion-grid">
 
@@ -85,7 +99,7 @@
               <path class="gvp-truck__window" d="M146 33.5H181.741C182.779 33.5 183.709 34.1415 184.078 35.112L190.538 52.112C191.16 53.748 189.951 55.5 188.201 55.5H146C144.619 55.5 143.5 54.3807 143.5 53V36C143.5 34.6193 144.619 33.5 146 33.5Z"/>
               <path class="gvp-truck__shine" d="M151 39H163M169 39H172"/>
               <path class="gvp-truck__navy" stroke="#061F4B" stroke-width="2" d="M150 65C150 65.39 149.763 65.8656 149.127 66.2893C148.499 66.7083 147.573 67 146.5 67C145.427 67 144.501 66.7083 143.873 66.2893C143.237 65.8656 143 65.39 143 65C143 64.61 143.237 64.1344 143.873 63.7107C144.501 63.2917 145.427 63 146.5 63C147.573 63 148.499 63.2917 149.127 63.7107C149.763 64.1344 150 64.61 150 65Z"/>
-              <rect x="187" y="63" width="5" height="7" rx="1" fill="#FFFFFF" stroke="#061F4B" stroke-width="2"/>
+              <rect x="187" y="63" width="5" height="7" rx="1" class="gvp-truck__headlight"/>
               <rect x="193" y="81" width="4" height="11" rx="1" class="gvp-truck__bumper" stroke-width="2"/>
               <rect x="6.5" y="1.5" width="121" height="90" rx="2.5" class="gvp-truck__box"/>
               <image data-mascot href="../01-mascot/light/mascot-640.png" x="12" y="3" width="110" height="59" preserveAspectRatio="xMidYMid meet"/>
@@ -100,14 +114,14 @@
                 <circle class="gvp-truck__tire" r="18"/>
                 <circle class="gvp-truck__hub" r="9.3"/>
                 <g class="gvp-truck__spokes"><path d="M0-7V-3M7 0H3M0 7V3M-7 0H-3"/></g>
-                <circle fill="#0066FF" r="2.6"/>
+                <circle class="gvp-truck__axle" r="2.6"/>
               </g>
 
               <g transform="translate(165 96)">
                 <circle class="gvp-truck__tire" r="18"/>
                 <circle class="gvp-truck__hub" r="9.3"/>
                 <g class="gvp-truck__spokes"><path d="M0-7V-3M7 0H3M0 7V3M-7 0H-3"/></g>
-                <circle fill="#0066FF" r="2.6"/>
+                <circle class="gvp-truck__axle" r="2.6"/>
               </g>
           </g>
         </svg>
@@ -154,7 +168,7 @@
               <path class="gvp-truck__window" d="M146 33.5H181.741C182.779 33.5 183.709 34.1415 184.078 35.112L190.538 52.112C191.16 53.748 189.951 55.5 188.201 55.5H146C144.619 55.5 143.5 54.3807 143.5 53V36C143.5 34.6193 144.619 33.5 146 33.5Z"/>
               <path class="gvp-truck__shine" d="M151 39H163M169 39H172"/>
               <path class="gvp-truck__navy" stroke="#061F4B" stroke-width="2" d="M150 65C150 65.39 149.763 65.8656 149.127 66.2893C148.499 66.7083 147.573 67 146.5 67C145.427 67 144.501 66.7083 143.873 66.2893C143.237 65.8656 143 65.39 143 65C143 64.61 143.237 64.1344 143.873 63.7107C144.501 63.2917 145.427 63 146.5 63C147.573 63 148.499 63.2917 149.127 63.7107C149.763 64.1344 150 64.61 150 65Z"/>
-              <rect x="187" y="63" width="5" height="7" rx="1" fill="#FFFFFF" stroke="#061F4B" stroke-width="2"/>
+              <rect x="187" y="63" width="5" height="7" rx="1" class="gvp-truck__headlight"/>
               <rect x="193" y="81" width="4" height="11" rx="1" class="gvp-truck__bumper" stroke-width="2"/>
               <rect x="6.5" y="1.5" width="121" height="90" rx="2.5" class="gvp-truck__box"/>
               <image data-mascot href="../01-mascot/dark/mascot-640.png" x="12" y="3" width="110" height="59" preserveAspectRatio="xMidYMid meet"/>
@@ -169,14 +183,14 @@
                 <circle class="gvp-truck__tire" r="18"/>
                 <circle class="gvp-truck__hub" r="9.3"/>
                 <g class="gvp-truck__spokes"><path d="M0-7V-3M7 0H3M0 7V3M-7 0H-3"/></g>
-                <circle fill="#0066FF" r="2.6"/>
+                <circle class="gvp-truck__axle" r="2.6"/>
               </g>
 
               <g transform="translate(165 96)">
                 <circle class="gvp-truck__tire" r="18"/>
                 <circle class="gvp-truck__hub" r="9.3"/>
                 <g class="gvp-truck__spokes"><path d="M0-7V-3M7 0H3M0 7V3M-7 0H-3"/></g>
-                <circle fill="#0066FF" r="2.6"/>
+                <circle class="gvp-truck__axle" r="2.6"/>
               </g>
           </g>
         </svg>
@@ -191,7 +205,7 @@
     </div>
     <footer class="gvp-motion-footer">
       <p>HTML + CSS + SVG · Manrope · адаптивная композиция<br>Учитывает настройку устройства «Уменьшение движения».</p>
-      <p>Основа: <a href="https://uiverse.io/vinodjangid07/popular-owl-27" target="_blank" rel="noreferrer">vinodjangid07 / Uiverse</a> · <a href="LICENSE.uiverse.txt">MIT License</a><br><a href="README.md">Как подключить</a> · <a href="CITIES.md">17 городов</a> · <a href="truck.css" download>CSS</a> · <a href="truck.js" download>JS</a></p>
+      <p>Основа: <a href="https://uiverse.io/vinodjangid07/popular-owl-27" target="_blank" rel="noreferrer">vinodjangid07 / Uiverse</a> · <a href="LICENSE.uiverse.txt">MIT License</a><br><a href="README.md">Как подключить</a> · <a href="CITIES.md">17 городов</a> · <a href="truck.css" download>CSS</a> · <a href="palettes.css" download>Палитры</a> · <a href="truck.js" download>JS</a></p>
     </footer>
   </main>
 </body>

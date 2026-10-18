@@ -13,6 +13,10 @@
 
 /* The component is isolated under .gvp-truck; its only external assets are local. */
 .gvp-truck {
+  --gvp-primary: #0066ff;
+  --gvp-deep: #061f4b;
+  --gvp-focus: #6babff;
+  --gvp-on-primary: #ffffff;
   --gvp-bg: #ffffff;
   --gvp-ink: #061f4b;
   --gvp-muted: #52627c;
@@ -92,20 +96,21 @@
 .gvp-city-roadbed { fill: var(--gvp-scene); }
 .gvp-truck__body { animation: gvp-truck-suspension 1s linear infinite; }
 .gvp-truck__box { fill: var(--gvp-box); stroke: var(--gvp-trim); stroke-width: 3; }
-.gvp-truck__cab { fill: #0066ff; stroke: var(--gvp-trim); stroke-width: 3; }
-.gvp-truck__window { fill: var(--gvp-window); stroke: #061f4b; stroke-width: 3; }
-.gvp-truck__shine { fill: none; stroke: #ffffff; stroke-width: 2.5; stroke-linecap: round; opacity: .7; }
-.gvp-truck__navy { fill: #061f4b; }
+.gvp-truck__cab { fill: var(--gvp-primary); stroke: var(--gvp-trim); stroke-width: 3; }
+.gvp-truck__window { fill: var(--gvp-window); stroke: var(--gvp-deep); stroke-width: 3; }
+.gvp-truck__shine { fill: none; stroke: var(--gvp-on-primary); stroke-width: 2.5; stroke-linecap: round; opacity: .7; }
+.gvp-truck__navy { fill: var(--gvp-deep); stroke: var(--gvp-deep); }
+.gvp-truck__headlight { fill: var(--gvp-on-primary); stroke: var(--gvp-deep); stroke-width: 2; }
 .gvp-truck__bumper { fill: var(--gvp-trim); stroke: var(--gvp-trim); }
 .gvp-truck__chassis { fill: var(--gvp-trim); }
-.gvp-truck__belt { fill: #0066ff; }
-.gvp-truck__tire { fill: #061f4b; stroke: var(--gvp-trim); stroke-width: 1.3; }
-.gvp-truck__hub { fill: #ffffff; }
+.gvp-truck__belt, .gvp-truck__axle { fill: var(--gvp-primary); }
+.gvp-truck__tire { fill: var(--gvp-deep); stroke: var(--gvp-trim); stroke-width: 1.3; }
+.gvp-truck__hub { fill: var(--gvp-on-primary); }
 .gvp-truck__spokes { animation: gvp-truck-wheel .72s linear infinite; transform-box: fill-box; transform-origin: center; }
-.gvp-truck__spokes path { stroke: #0066ff; stroke-width: 2.3; stroke-linecap: round; }
+.gvp-truck__spokes path { stroke: var(--gvp-primary); stroke-width: 2.3; stroke-linecap: round; }
 .gvp-truck__ground { stroke: var(--gvp-road); stroke-width: 2; stroke-linecap: round; }
-.gvp-truck__road { fill: none; stroke: #0066ff; stroke-width: 3; stroke-dasharray: 37 83; animation: gvp-truck-road 1.4s linear infinite; }
-.gvp-truck__speed { stroke: #0066ff; stroke-width: 4; stroke-linecap: round; animation: gvp-truck-speed 1s ease-in-out infinite; }
+.gvp-truck__road { fill: none; stroke: var(--gvp-primary); stroke-width: 3; stroke-dasharray: 37 83; animation: gvp-truck-road 1.4s linear infinite; }
+.gvp-truck__speed { stroke: var(--gvp-primary); stroke-width: 4; stroke-linecap: round; animation: gvp-truck-speed 1s ease-in-out infinite; }
 .gvp-truck__speed--second { animation-delay: -.4s; }
 .gvp-truck__bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .gvp-truck__caption { min-width: 0; margin: 0; color: var(--gvp-muted); font-size: 12px; font-weight: 600; line-height: 1.45; }
@@ -126,8 +131,8 @@
   font: 700 12px/1.2 'GVP Manrope', Manrope, system-ui, sans-serif;
   cursor: pointer;
 }
-.gvp-truck__pause:hover { border-color: #0066ff; }
-.gvp-truck__pause:focus-visible { outline: 3px solid #6babff; outline-offset: 3px; }
+.gvp-truck__pause:hover { border-color: var(--gvp-primary); }
+.gvp-truck__pause:focus-visible { outline: 3px solid var(--gvp-focus); outline-offset: 3px; }
 .gvp-truck__pause:disabled { opacity: .7; cursor: default; }
 .gvp-truck__pause svg { width: 12px; height: 12px; fill: currentColor; }
 .gvp-truck__pause .gvp-truck__play-icon { display: none; }
@@ -154,37 +159,44 @@
 }
 
 /* Standalone demo shell; omit these .gvp-motion-* rules when embedding markup. */
-.gvp-motion-page { margin: 0; background: #f4f7fc; color: #061f4b; font-family: 'GVP Manrope', Manrope, system-ui, sans-serif; }
+.gvp-motion-page { margin: 0; background: var(--gvp-scene, #f4f7fc); color: var(--gvp-ink, #061f4b); font-family: 'GVP Manrope', Manrope, system-ui, sans-serif; }
 .gvp-motion-demo { max-width: 1260px; margin: 0 auto; padding: 42px 32px 30px; }
 .gvp-motion-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 54px; }
 .gvp-motion-logo { display: block; width: 190px; max-width: 50vw; height: auto; }
-.gvp-motion-back { color: #52627c; font-size: 12px; font-weight: 700; text-decoration: none; }
-.gvp-motion-back:hover { color: #0066ff; }
-.gvp-motion-kicker { margin: 0 0 12px; color: #0066ff; font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.gvp-motion-back { color: var(--gvp-muted, #52627c); font-size: 12px; font-weight: 700; text-decoration: none; }
+.gvp-motion-back:hover { color: var(--gvp-primary, #0066ff); }
+.gvp-motion-kicker { margin: 0 0 12px; color: var(--gvp-primary, #0066ff); font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
 .gvp-motion-heading { margin: 0; font-size: clamp(30px, 5vw, 58px); line-height: 1.12; letter-spacing: -.045em; font-weight: 800; }
-.gvp-motion-intro { max-width: 620px; margin: 18px 0 30px; color: #52627c; font-size: 15px; line-height: 1.65; }
+.gvp-motion-intro { max-width: 620px; margin: 18px 0 30px; color: var(--gvp-muted, #52627c); font-size: 15px; line-height: 1.65; }
 .gvp-motion-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
-.gvp-city-picker { display: flex; align-items: center; gap: 14px; margin: 0 0 20px; }
-.gvp-city-picker label { flex-shrink: 0; color: #52627c; font-size: 12px; font-weight: 700; }
-.gvp-city-picker select { box-sizing: border-box; width: 260px; max-width: 100%; min-width: 0; min-height: 42px; padding: 9px 34px 9px 13px; border: 1px solid #c3d3e9; border-radius: 10px; background: #fff; color: #061f4b; font: 700 13px/1.4 'GVP Manrope', Manrope, system-ui, sans-serif; cursor: pointer; }
-.gvp-city-picker select:focus-visible { outline: 3px solid #6babff; outline-offset: 3px; }
-.gvp-motion-footer { margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: #52627c; font-size: 11px; line-height: 1.7; }
+.gvp-motion-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 720px; margin: 0 0 20px; }
+.gvp-city-picker { display: flex; align-items: center; gap: 10px; min-width: 0; margin: 0; }
+.gvp-city-picker label { flex-shrink: 0; color: var(--gvp-muted, #52627c); font-size: 12px; font-weight: 700; }
+.gvp-city-picker select { box-sizing: border-box; flex: 1; width: 100%; min-width: 0; min-height: 42px; padding: 9px 28px 9px 11px; border: 1px solid var(--gvp-line, #c3d3e9); border-radius: 10px; background: var(--gvp-bg, #fff); color: var(--gvp-ink, #061f4b); font: 700 13px/1.4 'GVP Manrope', Manrope, system-ui, sans-serif; cursor: pointer; }
+.gvp-city-picker select:focus-visible { outline: 3px solid var(--gvp-primary, #0066ff); outline-offset: 3px; }
+.gvp-palette-preview { display: flex; flex: 0 0 27px; height: 20px; overflow: hidden; border-radius: 5px; }
+.gvp-palette-preview i { flex: 1; background: var(--gvp-primary, #0066ff); }
+.gvp-palette-preview i:nth-child(2) { background: var(--gvp-deep, #061f4b); }
+.gvp-palette-preview i:nth-child(3) { background: var(--gvp-city-accent, #87aee0); }
+.gvp-motion-footer { margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: var(--gvp-muted, #52627c); font-size: 11px; line-height: 1.7; }
 .gvp-motion-footer p { margin: 0; }
 .gvp-motion-footer a { color: inherit; text-underline-offset: 3px; }
-.gvp-motion-footer a:hover { color: #0066ff; }
-.gvp-motion-page[data-embed='true'] { background: #ffffff; }
-.gvp-motion-page[data-embed='true'][data-theme='dark'] { background: #071426; }
+.gvp-motion-footer a:hover { color: var(--gvp-primary, #0066ff); }
+.gvp-motion-page[data-embed='true'] { background: var(--gvp-bg, #fff); }
+.gvp-motion-page[data-embed='true'][data-theme='dark'] { color-scheme: dark; }
 .gvp-motion-page[data-embed='true'] .gvp-motion-demo { display: flex; flex-direction: column; justify-content: center; min-height: 100vh; padding: 0; max-width: none; }
-.gvp-motion-page[data-embed='true'] .gvp-city-picker { box-sizing: border-box; width: 100%; max-width: 720px; margin: 0 auto 10px; padding: 0 10px; gap: 10px; }
-.gvp-motion-page[data-embed='true'] .gvp-city-picker select { flex: 1; width: auto; }
-.gvp-motion-page[data-embed='true'][data-theme='dark'] .gvp-city-picker label { color: #b1c2da; }
-.gvp-motion-page[data-embed='true'][data-theme='dark'] .gvp-city-picker select { background: #0c223e; border-color: #315679; color: #fff; color-scheme: dark; }
+.gvp-motion-page[data-embed='true'] .gvp-motion-controls { box-sizing: border-box; width: 100%; max-width: 720px; margin: 0 auto 10px; padding: 0 10px; }
+.gvp-motion-page[data-embed='true'][data-theme='dark'] .gvp-city-picker select:focus-visible { outline-color: var(--gvp-focus, #6babff); }
 .gvp-motion-page[data-embed='true'] .gvp-motion-grid { display: block; width: 100%; }
 .gvp-motion-page[data-embed='true'] .gvp-motion-header,
 .gvp-motion-page[data-embed='true'] .gvp-motion-title,
 .gvp-motion-page[data-embed='true'] .gvp-motion-footer { display: none; }
 .gvp-motion-page[data-embed='true'] .gvp-truck { max-width: 720px; margin-inline: auto; padding: 18px; }
 .gvp-motion-page[data-embed='true'] .gvp-truck__scene { max-height: 220px; }
+@media (max-width: 600px) {
+  .gvp-motion-controls { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .gvp-motion-page[data-embed='true'] .gvp-truck__scene { max-height: 160px; }
+}
 @media (max-width: 760px) {
   .gvp-motion-demo { padding: 28px 20px; }
   .gvp-motion-header { margin-bottom: 36px; }
