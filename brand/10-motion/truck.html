@@ -12,7 +12,7 @@
   <title>Фирменный грузовик · Груз в пути</title>
   <meta name="description" content="Фирменная CSS-анимация грузовика «Груз в пути» с маскотом-хаски. 17 городов и проезжающие достопримечательности. Светлая и тёмная темы.">
   <link rel="icon" href="../03-icons/web/light/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="truck.css?v=trim-1">
+  <link rel="stylesheet" href="truck.css?v=resize-1">
   <script src="city-landmarks.js?v=cities-2" defer></script>
   <script src="truck.js?v=cities-2" defer></script>
 </head>
@@ -58,20 +58,23 @@
         </div>
         <!-- Decorative animation: it does not report a shipment status or ETA. -->
         <svg class="gvp-truck__scene" viewBox="0 0 540 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <!-- Overscan tiles fill the side fields of a wide SVG viewport. -->
           <g class="gvp-city-skyline" aria-hidden="true">
+            <path transform="translate(-540 0)" d="M0 238V211H24V199H42V218H67V182H85V174H95V182H112V213H137V191H157V220H183V207H206V188H224V215H254V198H279V177H301V207H328V187H349V217H377V200H401V222H430V185H452V176H462V185H480V213H509V202H540V238Z"/>
             <path d="M0 238V211H24V199H42V218H67V182H85V174H95V182H112V213H137V191H157V220H183V207H206V188H224V215H254V198H279V177H301V207H328V187H349V217H377V200H401V222H430V185H452V176H462V185H480V213H509V202H540V238Z"/>
             <path transform="translate(540 0)" d="M0 238V211H24V199H42V218H67V182H85V174H95V182H112V213H137V191H157V220H183V207H206V188H224V215H254V198H279V177H301V207H328V187H349V217H377V200H401V222H430V185H452V176H462V185H480V213H509V202H540V238Z"/>
+            <path transform="translate(1080 0)" d="M0 238V211H24V199H42V218H67V182H85V174H95V182H112V213H137V191H157V220H183V207H206V188H224V215H254V198H279V177H301V207H328V187H349V217H377V200H401V222H430V185H452V176H462V185H480V213H509V202H540V238Z"/>
           </g>
-          <path class="gvp-city-hills" d="M0 239V216Q72 155 147 209T293 201T433 193T540 212V260H0Z"/>
-          <path class="gvp-city-river" d="M0 229Q110 222 220 237T540 232V268H0Z"/>
+          <path class="gvp-city-hills" d="M-540 260V218Q-405 142-270 211T0 213T270 208T540 214T810 207T1080 216V260Z"/>
+          <path class="gvp-city-river" d="M-540 229Q-405 222-270 237T0 232T270 237T540 232T810 237T1080 232V268H-540Z"/>
           <g class="gvp-city-pass"><g data-city-landmark transform="translate(0 38)"></g></g>
-          <path class="gvp-city-verge" d="M0 260Q140 243 285 255T540 250V282H0Z"/>
-          <path class="gvp-city-roadbed" d="M0 282H540V300H0Z"/>
+          <path class="gvp-city-verge" d="M-540 260Q-405 243-270 255T0 250T270 255T540 250T810 255T1080 250V282H-540Z"/>
+          <path class="gvp-city-roadbed" d="M-540 282H1080V300H-540Z"/>
           <path class="gvp-truck__speed" d="M41 176H67"/>
           <path class="gvp-truck__speed gvp-truck__speed--second" d="M30 194H58"/>
-          <path class="gvp-truck__ground" d="M18 282H522"/>
+          <path class="gvp-truck__ground" d="M-540 282H1080"/>
           <g class="gvp-truck__road">
-            <path d="M0 289H37V292H0ZM120 289H157V292H120ZM240 289H277V292H240ZM360 289H397V292H360ZM480 289H517V292H480ZM600 289H637V292H600Z"/>
+            <path d="M-600 290.5H1200"/>
           </g>
           <!-- The following truck geometry is adapted directly from vinodjangid07. -->
           <g transform="translate(95 87) scale(1.7)">
@@ -122,20 +125,23 @@
         </div>
         <!-- Decorative animation: it does not report a shipment status or ETA. -->
         <svg class="gvp-truck__scene" viewBox="0 0 540 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <!-- Overscan tiles fill the side fields of a wide SVG viewport. -->
           <g class="gvp-city-skyline" aria-hidden="true">
+            <path transform="translate(-540 0)" d="M0 238V211H24V199H42V218H67V182H85V174H95V182H112V213H137V191H157V220H183V207H206V188H224V215H254V198H279V177H301V207H328V187H349V217H377V200H401V222H430V185H452V176H462V185H480V213H509V202H540V238Z"/>
             <path d="M0 238V211H24V199H42V218H67V182H85V174H95V182H112V213H137V191H157V220H183V207H206V188H224V215H254V198H279V177H301V207H328V187H349V217H377V200H401V222H430V185H452V176H462V185H480V213H509V202H540V238Z"/>
             <path transform="translate(540 0)" d="M0 238V211H24V199H42V218H67V182H85V174H95V182H112V213H137V191H157V220H183V207H206V188H224V215H254V198H279V177H301V207H328V187H349V217H377V200H401V222H430V185H452V176H462V185H480V213H509V202H540V238Z"/>
+            <path transform="translate(1080 0)" d="M0 238V211H24V199H42V218H67V182H85V174H95V182H112V213H137V191H157V220H183V207H206V188H224V215H254V198H279V177H301V207H328V187H349V217H377V200H401V222H430V185H452V176H462V185H480V213H509V202H540V238Z"/>
           </g>
-          <path class="gvp-city-hills" d="M0 239V216Q72 155 147 209T293 201T433 193T540 212V260H0Z"/>
-          <path class="gvp-city-river" d="M0 229Q110 222 220 237T540 232V268H0Z"/>
+          <path class="gvp-city-hills" d="M-540 260V218Q-405 142-270 211T0 213T270 208T540 214T810 207T1080 216V260Z"/>
+          <path class="gvp-city-river" d="M-540 229Q-405 222-270 237T0 232T270 237T540 232T810 237T1080 232V268H-540Z"/>
           <g class="gvp-city-pass"><g data-city-landmark transform="translate(0 38)"></g></g>
-          <path class="gvp-city-verge" d="M0 260Q140 243 285 255T540 250V282H0Z"/>
-          <path class="gvp-city-roadbed" d="M0 282H540V300H0Z"/>
+          <path class="gvp-city-verge" d="M-540 260Q-405 243-270 255T0 250T270 255T540 250T810 255T1080 250V282H-540Z"/>
+          <path class="gvp-city-roadbed" d="M-540 282H1080V300H-540Z"/>
           <path class="gvp-truck__speed" d="M41 176H67"/>
           <path class="gvp-truck__speed gvp-truck__speed--second" d="M30 194H58"/>
-          <path class="gvp-truck__ground" d="M18 282H522"/>
+          <path class="gvp-truck__ground" d="M-540 282H1080"/>
           <g class="gvp-truck__road">
-            <path d="M0 289H37V292H0ZM120 289H157V292H120ZM240 289H277V292H240ZM360 289H397V292H360ZM480 289H517V292H480ZM600 289H637V292H600Z"/>
+            <path d="M-600 290.5H1200"/>
           </g>
           <!-- The following truck geometry is adapted directly from vinodjangid07. -->
           <g transform="translate(95 87) scale(1.7)">

@@ -74,12 +74,13 @@
   border-radius: 16px;
   background: var(--gvp-scene);
 }
+/* Background geometry extends beyond the viewBox to fill wide, height-capped scenes. */
 .gvp-city-skyline { fill: var(--gvp-skyline); animation: gvp-city-drift 50s linear infinite; }
 .gvp-city-hills { display: none; fill: var(--gvp-skyline); }
 .gvp-city-river { display: none; fill: var(--gvp-river); }
 .gvp-truck[data-landscape='river'] .gvp-city-river { display: block; }
 .gvp-truck[data-landscape='hills'] .gvp-city-hills { display: block; }
-.gvp-city-pass { transform: translateX(350px); animation: gvp-city-pass 24s linear -6.08s infinite; }
+.gvp-city-pass { transform: translateX(350px); animation: gvp-city-pass 24s linear -9.2s infinite; }
 .gvp-city-fill { fill: var(--gvp-city); }
 .gvp-city-accent { fill: var(--gvp-city-accent); }
 .gvp-city-window { fill: var(--gvp-city-window); }
@@ -101,7 +102,7 @@
 .gvp-truck__spokes { animation: gvp-truck-wheel .72s linear infinite; transform-box: fill-box; transform-origin: center; }
 .gvp-truck__spokes path { stroke: #0066ff; stroke-width: 2.3; stroke-linecap: round; }
 .gvp-truck__ground { stroke: var(--gvp-road); stroke-width: 2; stroke-linecap: round; }
-.gvp-truck__road { fill: #0066ff; animation: gvp-truck-road 1.4s linear infinite; }
+.gvp-truck__road { fill: none; stroke: #0066ff; stroke-width: 3; stroke-dasharray: 37 83; animation: gvp-truck-road 1.4s linear infinite; }
 .gvp-truck__speed { stroke: #0066ff; stroke-width: 4; stroke-linecap: round; animation: gvp-truck-speed 1s ease-in-out infinite; }
 .gvp-truck__speed--second { animation-delay: -.4s; }
 .gvp-truck__bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
@@ -135,7 +136,7 @@
 @keyframes gvp-truck-suspension { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
 @keyframes gvp-truck-wheel { to { transform: rotate(360deg); } }
 @keyframes gvp-truck-road { from { transform: translateX(0); } to { transform: translateX(-120px); } }
-@keyframes gvp-city-pass { from { transform: translateX(540px); } to { transform: translateX(-210px); } }
+@keyframes gvp-city-pass { from { transform: translateX(810px); } to { transform: translateX(-390px); } }
 @keyframes gvp-city-drift { from { transform: translateX(0); } to { transform: translateX(-540px); } }
 @keyframes gvp-truck-speed { 0%, 100% { opacity: .4; transform: translateX(0); } 50% { opacity: 1; transform: translateX(-5px); } }
 @media (prefers-reduced-motion: reduce) {
