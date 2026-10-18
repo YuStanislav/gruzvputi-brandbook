@@ -1,0 +1,155 @@
+/*
+ * Adapted from https://uiverse.io/vinodjangid07/popular-owl-27
+ * Copyright - 2026 vinodjangid07 (Vinod Jangid), MIT.
+ * Preserve the full notice in LICENSE.uiverse.txt when redistributing.
+ * Original truck silhouette, lamp and suspension/road movement retained.
+ */
+@font-face {
+  font-family: 'GVP Manrope';
+  src: url('../06-fonts/Manrope-Variable.woff2') format('woff2');
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+/* The component is isolated under .gvp-truck; its only external assets are local. */
+.gvp-truck {
+  --gvp-bg: #ffffff;
+  --gvp-ink: #061f4b;
+  --gvp-muted: #52627c;
+  --gvp-line: #dbe4f2;
+  --gvp-scene: #f4f7fc;
+  --gvp-road: #c3d3e9;
+  --gvp-lamp: #a8bcd6;
+  --gvp-box: #ffffff;
+  --gvp-trim: #061f4b;
+  --gvp-window: #b8d6ff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  padding: 25px 26px 22px;
+  overflow: hidden;
+  color: var(--gvp-ink);
+  background: var(--gvp-bg);
+  border: 1px solid var(--gvp-line);
+  border-radius: 24px;
+  font-family: 'GVP Manrope', Manrope, system-ui, sans-serif;
+  text-align: left;
+  color-scheme: light;
+}
+.gvp-truck *, .gvp-truck *::before, .gvp-truck *::after { box-sizing: border-box; }
+.gvp-truck[data-theme='dark'] {
+  --gvp-bg: #071426;
+  --gvp-ink: #ffffff;
+  --gvp-muted: #b1c2da;
+  --gvp-line: #243a58;
+  --gvp-scene: #0c223e;
+  --gvp-road: #315679;
+  --gvp-lamp: #315679;
+  --gvp-box: #061f4b;
+  --gvp-trim: #6babff;
+  --gvp-window: #b8d6ff;
+  color-scheme: dark;
+}
+.gvp-truck__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.gvp-truck__eyebrow { margin: 0; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.gvp-truck__variant { color: var(--gvp-muted); font-size: 11px; font-weight: 600; white-space: nowrap; }
+.gvp-truck__scene {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 18px 0 12px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--gvp-scene);
+}
+.gvp-truck__cloud { fill: none; stroke: var(--gvp-road); stroke-width: 2; stroke-linecap: round; }
+.gvp-truck__body { animation: gvp-truck-suspension 1s linear infinite; }
+.gvp-truck__box { fill: var(--gvp-box); stroke: var(--gvp-trim); stroke-width: 3; }
+.gvp-truck__cab { fill: #0066ff; stroke: var(--gvp-trim); stroke-width: 3; }
+.gvp-truck__window { fill: var(--gvp-window); stroke: #061f4b; stroke-width: 3; }
+.gvp-truck__shine { fill: none; stroke: #ffffff; stroke-width: 2.5; stroke-linecap: round; opacity: .7; }
+.gvp-truck__navy { fill: #061f4b; }
+.gvp-truck__belt { fill: #0066ff; }
+.gvp-truck__tire { fill: #061f4b; stroke: var(--gvp-trim); stroke-width: 1.3; }
+.gvp-truck__hub { fill: #ffffff; }
+.gvp-truck__spokes { animation: gvp-truck-wheel .72s linear infinite; transform-box: fill-box; transform-origin: center; }
+.gvp-truck__spokes path { stroke: #0066ff; stroke-width: 2.3; stroke-linecap: round; }
+.gvp-truck__ground { stroke: var(--gvp-road); stroke-width: 2; stroke-linecap: round; }
+.gvp-truck__road { fill: #0066ff; animation: gvp-truck-road 1.4s linear infinite; }
+.gvp-truck__lamp { fill: var(--gvp-lamp); animation: gvp-truck-lamp 4.2s linear infinite; }
+.gvp-truck__speed { stroke: #0066ff; stroke-width: 4; stroke-linecap: round; animation: gvp-truck-speed 1s ease-in-out infinite; }
+.gvp-truck__speed--second { animation-delay: -.4s; }
+.gvp-truck__bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.gvp-truck__caption { margin: 0; color: var(--gvp-muted); font-size: 13px; font-weight: 600; }
+.gvp-truck__pause {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 8px 12px;
+  color: var(--gvp-ink);
+  border: 1px solid var(--gvp-line);
+  border-radius: 10px;
+  background: var(--gvp-bg);
+  font: 700 12px/1.2 'GVP Manrope', Manrope, system-ui, sans-serif;
+  cursor: pointer;
+}
+.gvp-truck__pause:hover { border-color: #0066ff; }
+.gvp-truck__pause:focus-visible { outline: 3px solid #6babff; outline-offset: 3px; }
+.gvp-truck__pause:disabled { opacity: .7; cursor: default; }
+.gvp-truck__pause svg { width: 12px; height: 12px; fill: currentColor; }
+.gvp-truck__pause .gvp-truck__play-icon { display: none; }
+.gvp-truck[data-paused='true'] .gvp-truck__pause-icon { display: none; }
+.gvp-truck[data-paused='true'] .gvp-truck__play-icon { display: block; }
+.gvp-truck[data-paused='true'] *, .gvp-truck[data-paused='true'] *::before, .gvp-truck[data-paused='true'] *::after { animation-play-state: paused !important; }
+
+@keyframes gvp-truck-suspension { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+@keyframes gvp-truck-wheel { to { transform: rotate(360deg); } }
+@keyframes gvp-truck-road { from { transform: translateX(0); } to { transform: translateX(-120px); } }
+@keyframes gvp-truck-lamp { from { transform: translateX(0); } to { transform: translateX(-780px); } }
+@keyframes gvp-truck-speed { 0%, 100% { opacity: .4; transform: translateX(0); } 50% { opacity: 1; transform: translateX(-5px); } }
+@media (prefers-reduced-motion: reduce) {
+  .gvp-truck *, .gvp-truck *::before, .gvp-truck *::after { animation: none !important; }
+}
+@media (max-width: 360px) {
+  .gvp-truck { padding: 20px 16px 18px; border-radius: 18px; }
+  .gvp-truck__top { gap: 8px; }
+  .gvp-truck__eyebrow { font-size: 9px; letter-spacing: .07em; }
+  .gvp-truck__variant { font-size: 10px; }
+  .gvp-truck__caption { font-size: 11px; max-width: 11em; }
+  .gvp-truck__pause { padding: 8px 9px; font-size: 11px; }
+}
+
+/* Standalone demo shell; omit these .gvp-motion-* rules when embedding markup. */
+.gvp-motion-page { margin: 0; background: #f4f7fc; color: #061f4b; font-family: 'GVP Manrope', Manrope, system-ui, sans-serif; }
+.gvp-motion-demo { max-width: 1260px; margin: 0 auto; padding: 42px 32px 30px; }
+.gvp-motion-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 54px; }
+.gvp-motion-logo { display: block; width: 190px; max-width: 50vw; height: auto; }
+.gvp-motion-back { color: #52627c; font-size: 12px; font-weight: 700; text-decoration: none; }
+.gvp-motion-back:hover { color: #0066ff; }
+.gvp-motion-kicker { margin: 0 0 12px; color: #0066ff; font-size: 11px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.gvp-motion-heading { margin: 0; font-size: clamp(30px, 5vw, 58px); line-height: 1.12; letter-spacing: -.045em; font-weight: 800; }
+.gvp-motion-intro { max-width: 620px; margin: 18px 0 30px; color: #52627c; font-size: 15px; line-height: 1.65; }
+.gvp-motion-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.gvp-motion-footer { margin-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; color: #52627c; font-size: 11px; line-height: 1.7; }
+.gvp-motion-footer p { margin: 0; }
+.gvp-motion-footer a { color: inherit; text-underline-offset: 3px; }
+.gvp-motion-footer a:hover { color: #0066ff; }
+.gvp-motion-page[data-embed='true'] { background: #ffffff; }
+.gvp-motion-page[data-embed='true'][data-theme='dark'] { background: #071426; }
+.gvp-motion-page[data-embed='true'] .gvp-motion-demo { display: flex; align-items: center; min-height: 100vh; padding: 0; max-width: none; }
+.gvp-motion-page[data-embed='true'] .gvp-motion-grid { display: block; width: 100%; }
+.gvp-motion-page[data-embed='true'] .gvp-motion-header,
+.gvp-motion-page[data-embed='true'] .gvp-motion-title,
+.gvp-motion-page[data-embed='true'] .gvp-motion-footer { display: none; }
+.gvp-motion-page[data-embed='true'] .gvp-truck { max-width: 720px; margin-inline: auto; }
+.gvp-motion-page[data-embed='true'] .gvp-truck__scene { max-height: 270px; }
+@media (max-width: 760px) {
+  .gvp-motion-demo { padding: 28px 20px; }
+  .gvp-motion-header { margin-bottom: 36px; }
+  .gvp-motion-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+}
