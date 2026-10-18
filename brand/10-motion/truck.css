@@ -79,7 +79,7 @@
 .gvp-city-river { display: none; fill: var(--gvp-river); }
 .gvp-truck[data-landscape='river'] .gvp-city-river { display: block; }
 .gvp-truck[data-landscape='hills'] .gvp-city-hills { display: block; }
-.gvp-city-pass { transform: translateX(350px); animation: gvp-city-pass 18s linear infinite; }
+.gvp-city-pass { transform: translateX(350px); animation: gvp-city-pass 24s linear -6.08s infinite; }
 .gvp-city-fill { fill: var(--gvp-city); }
 .gvp-city-accent { fill: var(--gvp-city-accent); }
 .gvp-city-window { fill: var(--gvp-city-window); }
@@ -133,7 +133,7 @@
 @keyframes gvp-truck-suspension { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
 @keyframes gvp-truck-wheel { to { transform: rotate(360deg); } }
 @keyframes gvp-truck-road { from { transform: translateX(0); } to { transform: translateX(-120px); } }
-@keyframes gvp-city-pass { from { transform: translateX(350px); } to { transform: translateX(-210px); } }
+@keyframes gvp-city-pass { from { transform: translateX(540px); } to { transform: translateX(-210px); } }
 @keyframes gvp-city-drift { from { transform: translateX(0); } to { transform: translateX(-540px); } }
 @keyframes gvp-truck-speed { 0%, 100% { opacity: .4; transform: translateX(0); } 50% { opacity: 1; transform: translateX(-5px); } }
 @media (prefers-reduced-motion: reduce) {
