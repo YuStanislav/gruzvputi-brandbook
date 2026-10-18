@@ -6,6 +6,30 @@
   const embedded = query.get('embed') === '1';
   const cards = [...document.querySelectorAll('.gvp-truck')];
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const scenes = window.GVP_CITY_SCENES;
+  const picker = document.querySelector('[data-gvp-city]');
+  let currentCity = 'moskva';
+
+  const setCity = city => {
+    if (typeof city !== 'string' || !Object.prototype.hasOwnProperty.call(scenes, city)) return false;
+    const scene = scenes[city];
+    currentCity = city;
+    cards.filter(card => card.isConnected).forEach(card => {
+      card.dataset.city = city;
+      card.dataset.landscape = scene.landscape;
+      // Only fixed, local SVG fragments from city-landmarks.js are inserted.
+      card.querySelector('[data-city-landmark]').innerHTML = scene.svg;
+      card.querySelector('[data-city-label]').textContent = scene.name;
+      card.querySelector('[data-landmark-label]').textContent = scene.landmark;
+      const pass = card.querySelector('.gvp-city-pass');
+      pass.style.animation = 'none';
+      pass.getBoundingClientRect();
+      pass.style.removeProperty('animation');
+    });
+    if (picker) picker.value = city;
+    try { window.localStorage.setItem('gvp-truck-city', city); } catch (_) { /* Offline / storage disabled. */ }
+    return true;
+  };
 
   const setTheme = (card, theme) => {
     if (theme !== 'light' && theme !== 'dark') return;
@@ -35,11 +59,18 @@
     page.dataset.embed = 'true';
     cards.slice(1).forEach(card => card.remove());
     setTheme(cards[0], query.get('theme') === 'dark' ? 'dark' : 'light');
-    window.addEventListener('message', event => {
-      if (event.source !== window.parent || !event.data || event.data.type !== 'gvp-theme') return;
-      setTheme(cards[0], event.data.theme);
-    });
   }
+
+  let savedCity;
+  try { savedCity = window.localStorage.getItem('gvp-truck-city'); } catch (_) { /* Storage optional. */ }
+  if (!setCity(query.get('city')) && !setCity(savedCity)) setCity('moskva');
+  if (picker) picker.addEventListener('change', () => setCity(picker.value));
+  window.GVPTruck = Object.freeze({ setCity, getCity: () => currentCity });
+  window.addEventListener('message', event => {
+    if (event.source !== window.parent || !event.data) return;
+    if (event.data.type === 'gvp-city') setCity(event.data.city);
+    if (embedded && event.data.type === 'gvp-theme') setTheme(cards[0], event.data.theme);
+  });
 
   cards.filter(card => card.isConnected).forEach(card => {
     const button = card.querySelector('.gvp-truck__pause');
