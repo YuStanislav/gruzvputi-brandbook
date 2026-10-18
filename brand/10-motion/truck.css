@@ -77,10 +77,12 @@
 /* Background geometry extends beyond the viewBox to fill wide, height-capped scenes. */
 .gvp-city-skyline { fill: var(--gvp-skyline); animation: gvp-city-drift 50s linear infinite; }
 .gvp-city-hills { display: none; fill: var(--gvp-skyline); }
+.gvp-city-far-ground { fill: var(--gvp-skyline); }
 .gvp-city-river { display: none; fill: var(--gvp-river); }
 .gvp-truck[data-landscape='river'] .gvp-city-river { display: block; }
 .gvp-truck[data-landscape='hills'] .gvp-city-hills { display: block; }
-.gvp-city-pass { transform: translateX(350px); animation: gvp-city-pass 24s linear -9.2s infinite; }
+/* Smaller, softer landmarks belong to the middle distance; terrain covers their bases. */
+.gvp-city-pass { opacity: .78; transform: translateX(350px); animation: gvp-city-pass 24s linear -9.2s infinite; }
 .gvp-city-fill { fill: var(--gvp-city); }
 .gvp-city-accent { fill: var(--gvp-city-accent); }
 .gvp-city-window { fill: var(--gvp-city-window); }
