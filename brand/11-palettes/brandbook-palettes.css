@@ -1,0 +1,32 @@
+/* Whole-brandbook palette UI. Color definitions live in palette-tokens.css. */
+.brandbook-controls{display:flex;align-items:center;gap:12px;margin-left:auto;min-width:0}
+.brandbook-palette{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--text)}
+.brandbook-palette select{min-height:42px;max-width:155px;padding:8px 28px 8px 11px;font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:12px}
+.brandbook-palette select:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.brandbook-controls .theme-button{margin-left:0}
+.brand-palette-summary{margin-top:28px;padding:24px;border:1px solid var(--border);border-radius:20px;background:var(--surface)}
+.brand-palette-summary h2{font-size:24px;letter-spacing:-.025em}.brand-palette-summary>p{font-size:13px;margin:12px 0 18px;max-width:940px}
+.brand-palette-choices{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.brand-palette-choice{text-align:left;padding:14px;border:1px solid var(--border);border-radius:12px;color:var(--text);background:var(--bg);font:700 12px Manrope,system-ui,sans-serif;min-width:0}
+.brand-palette-choice[aria-pressed=true]{outline:2px solid var(--link);outline-offset:1px;background:var(--raised)}
+.brand-palette-chip{display:flex;height:17px;border-radius:4px;overflow:hidden;margin-bottom:10px}.brand-palette-chip i{flex:1}
+.brand-selection-note{font-size:12px;margin-top:16px;color:var(--muted)}
+.button:hover{background:var(--gvp-primary-hover)}
+.hero-art{background:var(--brand-primary)}.hero-art .art-number{color:#fff}
+.logo-stage.dark-stage,.type-panel,.downloads{background:var(--brand-deep)}
+.mascot-stage{background:linear-gradient(135deg,var(--brand-ice),var(--brand-light-raised))}
+.type-panel .alphabet,.type-panel .license,.type-panel a,.downloads p,.download-list a span{color:var(--brand-dark-muted)}
+.downloads .eyebrow{color:var(--brand-sky)}
+.ui-preview{background:var(--brand-light-surface);color:var(--brand-light-text);border-color:var(--brand-light-border)}
+.ui-preview.dark-ui{background:var(--brand-midnight);color:var(--brand-dark-text);border-color:var(--brand-dark-border)}
+.ui-preview p,.ui-label,.ui-top span,.timeline span{color:var(--brand-light-muted)}
+.dark-ui p,.dark-ui .ui-label,.dark-ui .ui-top span,.dark-ui .timeline span{color:var(--brand-dark-muted)}
+.timeline span{border-color:var(--brand-light-border)}.timeline span:before{background:var(--brand-light-border)}
+.dark-ui .timeline span{border-color:var(--brand-dark-border)}.dark-ui .timeline span:before{background:var(--brand-dark-border)}
+.timeline .active,.dark-ui .timeline .active{border-color:var(--brand-primary)}
+.timeline .active:before,.dark-ui .timeline .active:before,.ui-button{background:var(--brand-primary)}
+.theme-meta [data-brand-contrast]{max-width:100%}
+@media(max-width:1180px){.nav{display:none}.topbar-inner{flex-wrap:wrap;gap:18px}.brandbook-controls{margin-left:auto}}
+@media(max-width:760px){.brandbook-controls{width:100%;justify-content:space-between;gap:8px}.brandbook-palette{font-size:11px}.brandbook-palette select{max-width:145px}.brandbook-controls .theme-button{padding:10px 12px}.brand-palette-summary{padding:20px}.brand-palette-choices{grid-template-columns:repeat(2,minmax(0,1fr))}.brand-palette-choice:last-child{grid-column:1/-1}.brand-palette-summary h2{font-size:22px}}
+@media(max-width:350px){.brandbook-palette{gap:5px}.brandbook-palette select{max-width:130px;padding-left:7px}.brandbook-controls .theme-button{padding:10px 8px;font-size:10px}.hero h1{font-size:38px}}
+@media print{.brandbook-controls,.brand-palette-summary{display:none}.hero-art,.type-panel,.downloads{-webkit-print-color-adjust:exact;print-color-adjust:exact}}

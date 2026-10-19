@@ -93,7 +93,11 @@
   if (!setCity(query.get('city')) && !setCity(savedCity)) setCity('moskva');
   if (!setPalette(query.get('palette')) && !setPalette(savedPalette)) setPalette('brand');
   if (picker) picker.addEventListener('change', () => setCity(picker.value));
-  if (palettePicker) palettePicker.addEventListener('change', () => setPalette(palettePicker.value));
+  if (palettePicker) palettePicker.addEventListener('change', () => {
+    setPalette(palettePicker.value);
+    if (embedded && window.parent !== window) window.parent.postMessage(
+      { type: 'gvp-palette-change', palette: currentPalette }, location.protocol === 'file:' ? '*' : location.origin);
+  });
   window.GVPTruck = Object.freeze({ setCity, getCity: () => currentCity, setPalette, getPalette: () => currentPalette });
   window.addEventListener('message', event => {
     if (event.source !== window.parent || !event.data) return;
