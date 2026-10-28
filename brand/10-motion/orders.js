@@ -4,6 +4,8 @@
   if(new URLSearchParams(location.search).get('view')==='mobile') document.body.dataset.view='mobile';
   const desktopQuery = matchMedia('(min-width: 1000px)');
   const isDesktop = () => desktopQuery.matches && !document.body.dataset.embed && document.body.dataset.view !== 'mobile';
+  const isOrderPage = document.body.dataset.page === 'order';
+  const persist = () => { try { sessionStorage.setItem('gvp-orders-demo',JSON.stringify(orders)); sessionStorage.setItem('gvp-orders-theme',document.documentElement.dataset.theme); } catch (_) {} };
   window.addEventListener('message',event=> { if(event.source===window.parent && (event.origin===location.origin || location.protocol==='file:') && event.data?.type==='gvp-theme' && ['light','dark'].includes(event.data.theme)) document.documentElement.dataset.theme=event.data.theme; });
   const $ = selector => document.querySelector(selector);
   const home = $('#home'), detail = $('#detail'), menu = $('#order-menu'), modal = $('#modal');
@@ -28,8 +30,10 @@
     $('#order-count').textContent = visible.length;
     $('#empty').hidden = visible.length !== 0;
     $('#order-list').replaceChildren(...visible.map((order, index) => {
-      const button = document.createElement('button');
-      button.type = 'button'; button.className = 'order-card' + (index ? ' secondary' : '');
+      const button = document.createElement(isDesktop() ? 'a' : 'button');
+      if (isDesktop()) button.href = `order.html?id=${order.id}`;
+      else button.type = 'button';
+      button.className = 'order-card' + (index ? ' secondary' : '');
       if (current?.id === order.id) button.setAttribute('aria-current','true');
       // Only fixed demo content and values assigned through the edit form are rendered.
       const heading = document.createElement('h3'); heading.textContent = order.title;
@@ -41,9 +45,10 @@
       foot.append(status,meta); button.append(heading,route,foot);
       const unread = order.unread.reduce((a,b) => a+b,0);
       if (unread) { const badge = document.createElement('span'); badge.className = 'unread'; badge.textContent = unread; badge.setAttribute('aria-label',`${unread} непрочитанных сообщений`); button.append(badge); }
-      button.addEventListener('click',() => openOrder(order));
+      button.addEventListener('click',() => { persist(); if (!isDesktop()) openOrder(order); });
       return button;
     }));
+    persist();
   };
   const offerPrice = index => current.id === 2 ? [700,900,800][index] : people[index].price;
   const renderDetail = () => {
@@ -65,13 +70,13 @@
       button.innerHTML = `<span class="avatar ${person.online ? 'online' : ''}" aria-hidden="true">${person.initials}</span><span><span class="offer-top"><span class="offer-name">${person.name}</span><span class="offer-time">13:${47-index*2}</span></span><span class="offer-tags"><span class="tag star">★ ${person.rating}</span><span class="tag">${person.reviews} отзывов</span></span><span class="offer-price">${money(offerPrice(index))}</span><span class="offer-bottom"><span class="offer-message">${current.id === 2 ? 'Доставлю лично в руки. Готов выехать.' : person.message}</span>${current.unread[index] ? `<span class="unread" aria-label="Новых сообщений: ${current.unread[index]}">${current.unread[index]}</span>` : ''}</span></span>`;
       button.addEventListener('click',() => openChat(index)); return button;
     }));
-    if (isDesktop()) renderHome();
+    persist();
   };
   const openOrder = (order, focus = true) => {
     closeMenu(false);
     $('#status-extra').hidden = true;
     $('#status-toggle').setAttribute('aria-expanded','false');
-    current = order; renderDetail(); home.hidden = !isDesktop(); detail.hidden = false;
+    current = order; renderDetail(); home.hidden = true; detail.hidden = false;
     $('#desktop-empty').hidden = true; detail.scrollTop = 0;
     $('.device').setAttribute('aria-label',isDesktop() ? 'Пример кабинета заказчика' : 'Пример мобильного кабинета заказчика');
     if (focus) {
@@ -80,14 +85,10 @@
     }
   };
   const goHome = () => {
+    if (isOrderPage) { persist(); location.href='orders.html'; return; }
     closeMenu(false); detail.hidden = true; home.hidden = false;
     $('#status-extra').hidden = true; $('#status-toggle').setAttribute('aria-expanded','false');
     current = null; renderHome();
-    if (isDesktop()) {
-      const next = orders.find(order => !order.hidden);
-      if (next) openOrder(next, false);
-      else $('#desktop-empty').hidden = false;
-    }
     const card = $('#order-list button'); if(card) card.focus({preventScroll:true}); else $('#refresh').focus({preventScroll:true});
   };
   const positionModal = () => {
@@ -143,21 +144,27 @@
   let touchStart;
   home.addEventListener('touchstart',event=> { touchStart=home.scrollTop===0?event.touches[0].clientY:null; },{passive:true});
   home.addEventListener('touchend',event=> { if(touchStart!==null&&event.changedTouches[0].clientY-touchStart>65)refresh(); touchStart=null; },{passive:true});
-  $('#theme').addEventListener('click',()=> { const dark=document.documentElement.dataset.theme!=='dark'; document.documentElement.dataset.theme=dark?'dark':'light'; $('#theme').textContent=dark?'Светлая тема':'Тёмная тема'; $('#theme').setAttribute('aria-pressed',String(dark)); });
-  const reset=()=> { generation++; clearTimeout(refreshTimer); if(modal.open)modal.close(); orders=initialOrders(); current=null; home.classList.remove('refreshing'); home.removeAttribute('aria-busy'); $('#refresh').disabled=false; closeMenu(false); detail.hidden=true; home.hidden=false; home.scrollTop=0; $('#desktop-empty').hidden=true; $('#status-extra').hidden=true; $('#status-toggle').setAttribute('aria-expanded','false'); renderHome(); if(isDesktop())openOrder(orders[0],false); };
+  $('#theme').addEventListener('click',()=> { const dark=document.documentElement.dataset.theme!=='dark'; document.documentElement.dataset.theme=dark?'dark':'light'; $('#theme').textContent=dark?'Светлая тема':'Тёмная тема'; $('#theme').setAttribute('aria-pressed',String(dark)); persist(); });
+  const reset=(restore=false)=> {
+    generation++; clearTimeout(refreshTimer); if(modal.open)modal.close(); orders=initialOrders(); current=null;
+    if (restore) { try { const saved=JSON.parse(sessionStorage.getItem('gvp-orders-demo')); if(Array.isArray(saved)&&saved.length===2&&saved.every(order=>Array.isArray(order.unread)&&typeof order.id==='number')) orders=saved; const theme=sessionStorage.getItem('gvp-orders-theme'); if(['light','dark'].includes(theme)) document.documentElement.dataset.theme=theme; } catch (_) {} }
+    const dark=document.documentElement.dataset.theme==='dark'; $('#theme').textContent=dark?'Светлая тема':'Тёмная тема'; $('#theme').setAttribute('aria-pressed',String(dark));
+    $('.device').setAttribute('aria-label',isDesktop()?'Пример кабинета заказчика':'Пример мобильного кабинета заказчика');
+    home.classList.remove('refreshing'); home.removeAttribute('aria-busy'); $('#refresh').disabled=false; closeMenu(false); detail.hidden=true; home.hidden=false; home.scrollTop=0; $('#desktop-empty').hidden=true; $('#status-extra').hidden=true; $('#status-toggle').setAttribute('aria-expanded','false'); renderHome();
+    if(isOrderPage) { const id=Number(new URLSearchParams(location.search).get('id')); openOrder(orders.find(order=>order.id===id)||orders[0],false); }
+  };
   $('#reset').addEventListener('click',()=> { reset(); toast('Можно пройти сценарий заново'); });
   $('#empty-reset').addEventListener('click',()=> { reset(); toast('Демо-заказы восстановлены'); });
   desktopQuery.addEventListener('change',()=> {
     closeMenu(false);
-    if (isDesktop()) {
-      const order = current || orders.find(item => !item.hidden);
-      if (order) openOrder(order,false);
-      else { home.hidden=false; $('#desktop-empty').hidden=false; }
+    if (isDesktop() && !isOrderPage) {
+      current=null; home.hidden=false; detail.hidden=true; renderHome();
     } else {
       home.hidden=!!current; detail.hidden=!current; $('#desktop-empty').hidden=true;
       $('.device').setAttribute('aria-label','Пример мобильного кабинета заказчика');
     }
     if (modal.open) positionModal();
   });
-  reset();
+  reset(true);
+  window.addEventListener('pageshow',event => { if(event.persisted) reset(true); });
 })();

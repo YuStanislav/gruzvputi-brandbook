@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Заказ · Груз в пути</title>
+  <link rel="icon" href="../03-icons/web/light/favicon.svg">
+  <link rel="stylesheet" href="orders.css?v=pages-2"><link rel="stylesheet" href="orders-desktop.css?v=2"><script src="orders.js?v=pages-2" defer></script>
+</head>
+<body data-page="order">
+  <header class="desktop-top"><a class="brand" href="../../index.html#orders"><img src="../02-logos/svg/logo-horizontal-light.svg" alt="Груз в пути"></a><nav aria-label="Кабинет"><a class="desktop-nav-current" href="orders.html">Мои заказы</a><a href="../../index.html#orders">Брендбук ↗</a><a href="orders.html?view=mobile">Мобильный пример ↗</a></nav><span class="desktop-account"><span class="profile">С</span> Станислав</span></header>
+  <main class="showcase">
+    <aside class="guide">
+      <a class="brand" href="../../index.html#orders"><img src="../02-logos/svg/logo-horizontal-light.svg" alt="Груз в пути"></a>
+      <p class="eyebrow">Айдентика в интерфейсе / 11</p>
+      <h1>Ваш заказ.<br> Все предложения.</h1>
+      <p class="lead">От карточки заказа — к выбору перевозчика. Знакомая логика, спокойное движение и наш характер.</p>
+      <ol class="instructions"><li><b>Откройте заказ</b><span>Карточка раскрывается в экран предложений.</span></li><li><b>Сравните перевозчиков</b><span>Цена, рейтинг и сообщение — рядом.</span></li><li><b>Управляйте перевозкой</b><span>Меню справа вверху и статус внизу.</span></li></ol>
+      <div class="demo-tools"><button id="theme" type="button" aria-pressed="false">Тёмная тема</button><button id="reset" type="button">Начать заново</button><a class="preview-return" href="orders.html">Автоматический размер ↗</a></div>
+      <p class="disclaimer">Интерактивный прототип. Заказы, имена и цены вымышлены. Действия выполняются только внутри примера.</p>
+      <a class="back-link" href="truck.html#orders-demo">← К анимациям бренда</a>
+    </aside>
+    <section class="device" aria-label="Пример мобильного кабинета заказчика">
+      <div class="device-top"><span>9:41</span><span aria-hidden="true">● ● ● ▰</span></div>
+      <div class="app" id="app">
+        <section class="screen home" id="home" aria-label="Мои заказы">
+          <div class="home-banner"><span>Вам по пути.</span><img src="../01-mascot/light/mascot-640.png" alt="Хаски с посылкой"></div>
+          <div class="refresh-indicator" aria-hidden="true"><span></span></div>
+          <div class="home-sheet">
+            <header class="home-header"><div><span class="muted city">⌖ Москва</span><h2>Добрый день, Станислав</h2></div><span class="profile" aria-hidden="true">С</span></header>
+            <div class="section-line"><h3>Мои заказы <span class="muted" id="order-count">2</span></h3><button class="icon-button" id="refresh" aria-label="Обновить заказы" type="button">↻</button></div>
+            <div id="order-list"></div>
+            <div class="empty" id="empty" hidden><img src="../01-mascot/light/mascot-640.png" alt=""><h3>Впереди новые маршруты</h3><p>Все заказы скрыты. Можно восстановить исходный пример.</p><button id="empty-reset" class="secondary-button" type="button">Вернуть демо-заказы</button></div>
+            <div class="help-card"><span class="eyebrow">Вы выбираете</span><h3>Хорошая поездка<br>начинается с доверия.</h3><p>Сравните цены и отзывы.<br>Договоритесь о деталях в чате.</p><span class="help-route" aria-hidden="true">● ─ ─ ─ ◉</span></div>
+            <p class="home-note">Ваша цена. Ваш перевозчик. Ваш путь.</p>
+          </div>
+        </section>
+        <section class="screen detail" id="detail" aria-label="Предложения по заказу" hidden>
+          <header class="detail-header"><div class="detail-nav"><button id="back" class="icon-button inverse" aria-label="Назад к заказам" type="button">‹</button><span class="eyebrow">Мой заказ</span><button id="menu-toggle" class="icon-button inverse" aria-label="Действия с заказом" aria-expanded="false" aria-controls="order-menu" type="button">···</button></div><h2 id="detail-title"></h2><p class="published"><i></i><span id="detail-status">Заказ опубликован</span></p><p class="detail-route" id="detail-route"></p></header>
+          <div class="offers-sheet"><div class="section-line"><h3>Предложения <span class="muted" id="offers-count"></span></h3><span class="live-label">На связи</span></div><div id="offers"></div><div class="offers-tip"><b>Выберите своего попутчика</b><p>Откройте предложение, чтобы обсудить время и детали перевозки.</p></div></div>
+          <div class="status-wrap"><div class="status-extra" id="status-extra" hidden><b>Заказ виден перевозчикам</b><p>Отклики появляются здесь. Непрочитанные сообщения отмечены синим.</p><div class="status-metrics"><span>Просмотры <b>17</b></span><span>Предложения <b id="status-offers">5</b></span></div></div><button id="status-toggle" class="status-pill" aria-expanded="false" aria-controls="status-extra" type="button"><span aria-hidden="true">◉</span><span><b>Заказ опубликован</b><small>17 просмотров</small></span><span class="chevron" aria-hidden="true">⌃</span></button></div>
+        </section>
+        <div class="desktop-empty" id="desktop-empty" hidden><img src="../01-mascot/light/mascot-640.png" alt=""><h2>Здесь начинается новый путь</h2><p>Выберите заказ слева, чтобы посмотреть предложения перевозчиков.</p></div>
+        <div class="menu-backdrop" id="menu-backdrop" hidden></div>
+        <div class="order-menu" id="order-menu" role="group" aria-label="Действия с заказом" hidden><button data-action="hide" type="button"><span>Скрыть заказ</span><span aria-hidden="true">⊘</span></button><button data-action="details" type="button"><span>Детали заказа</span><span aria-hidden="true">☷</span></button><button data-action="edit" type="button"><span>Изменить заказ</span><span aria-hidden="true">✎</span></button><button data-action="support" type="button"><span>Поддержка</span><span aria-hidden="true">?</span></button><button class="danger" data-action="cancel" type="button"><span>Отменить заказ</span><span aria-hidden="true">×</span></button></div>
+        <dialog id="modal" aria-labelledby="modal-title"><div class="modal-head"><h3 id="modal-title"></h3><button id="modal-close" class="icon-button" aria-label="Закрыть окно" type="button">×</button></div><div id="modal-body"></div></dialog>
+      </div>
+      <div class="device-bottom" aria-hidden="true"></div>
+    </section>
+    <div class="toast" id="toast" role="status"></div>
+  </main>
+</body>
+</html>

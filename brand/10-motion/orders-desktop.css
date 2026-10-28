@@ -67,3 +67,31 @@ body[data-view=mobile] .preview-return{display:inline-block;font-size:11px;align
   body:not([data-embed]):not([data-view=mobile]) dialog{border:1px solid var(--line);border-radius:22px;padding:28px 30px}
   @keyframes desktop-detail{from{opacity:.4;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
 }
+/* Desktop: the same card list as mobile, followed by a separate order page. */
+@media(min-width:1000px){
+ body:not([data-embed]):not([data-view=mobile]) .device{height:auto;min-height:0;max-height:none}
+ body:not([data-embed]):not([data-view=mobile]) .app{display:block;height:auto;min-height:0}
+ body:not([data-embed]):not([data-view=mobile]) .screen{height:auto;overflow:visible}
+ body:not([data-embed]):not([data-view=mobile]) .home{border:0;background:var(--surface)}
+ body:not([data-embed]):not([data-view=mobile]) .home-banner{display:flex;height:140px;padding:0 42px;background:var(--navy)}
+ body:not([data-embed]):not([data-view=mobile]) .home-banner>span{font-size:32px}
+ body:not([data-embed]):not([data-view=mobile]) .home-banner img{width:210px}
+ body:not([data-embed]):not([data-view=mobile]) .home-sheet{max-width:1020px;margin:auto;padding:34px 42px 40px}
+ body:not([data-embed]):not([data-view=mobile]) .home-header h2{font-size:20px}
+ body:not([data-embed]):not([data-view=mobile]) .order-card{min-height:190px;padding:28px 30px;margin-bottom:18px;background:var(--navy);color:white;text-decoration:none}
+ body:not([data-embed]):not([data-view=mobile]) .order-card.secondary{background:var(--soft);color:var(--ink)}
+ body:not([data-embed]):not([data-view=mobile]) .order-card h3{font-size:27px}
+ body:not([data-embed]):not([data-view=mobile]) .order-card .route{font-size:13px}
+ body:not([data-embed]):not([data-view=mobile]) .order-card .order-foot{font-size:12px;padding-top:35px}
+ body:not([data-embed]):not([data-view=mobile]) .order-card>.unread{right:30px;top:28px}
+ body:not([data-embed]):not([data-view=mobile]) .help-card{padding:28px;background:var(--soft)}
+ body:not([data-embed]):not([data-view=mobile]) .help-card h3{font-size:25px}
+ body:not([data-embed]):not([data-view=mobile]) .help-card p{font-size:13px}
+ body:not([data-embed]):not([data-view=mobile]) .detail{display:block;animation:none}
+ body:not([data-embed]):not([data-view=mobile]) .detail-header{padding:28px 42px;min-height:210px}
+ body:not([data-embed]):not([data-view=mobile]) .detail-nav{gap:18px}
+ body:not([data-embed]):not([data-view=mobile]) #back{display:grid}
+ body:not([data-embed]):not([data-view=mobile]) .offers-sheet{max-width:1020px;margin:auto;padding:32px 42px}
+ body:not([data-embed]):not([data-view=mobile]) .status-wrap{max-width:1020px;margin:auto;padding:20px 42px 30px;border:0}
+ body:not([data-embed]):not([data-view=mobile]) .refresh-indicator{top:160px;left:auto;right:40px}
+}
