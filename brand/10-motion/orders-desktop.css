@@ -1,0 +1,69 @@
+/* Desktop uses the same order state and interactions as the mobile prototype. */
+.desktop-top,.desktop-empty,.preview-return{display:none}
+body[data-view=mobile] .preview-return{display:inline-block;font-size:11px;align-self:center;padding:8px 0}
+@media(min-width:1000px){
+  body:not([data-embed]):not([data-view=mobile]) .desktop-top{display:flex;align-items:center;justify-content:space-between;gap:28px;max-width:1504px;margin:auto;padding:25px 48px;border-bottom:1px solid var(--line)}
+  .desktop-top nav{display:flex;gap:30px;align-items:center;font-size:12px;font-weight:700}.desktop-top a{text-decoration:none}.desktop-top nav a{color:var(--muted)}.desktop-nav-current{color:var(--blue)}.desktop-account{display:flex;gap:10px;align-items:center;font-size:12px;font-weight:700}
+  body:not([data-embed]):not([data-view=mobile]) .showcase{display:block;max-width:1504px;padding:32px 48px 40px}
+  body:not([data-embed]):not([data-view=mobile]) .guide{display:grid;grid-template-columns:1fr auto;column-gap:28px;padding:0;margin-bottom:26px}
+  body:not([data-embed]):not([data-view=mobile]) .guide>.brand,body:not([data-embed]):not([data-view=mobile]) .guide>.instructions,body:not([data-embed]):not([data-view=mobile]) .guide>.back-link{display:none}
+  body:not([data-embed]):not([data-view=mobile]) .guide>.eyebrow{margin:0 0 9px;font-size:9px;grid-column:1}
+  body:not([data-embed]):not([data-view=mobile]) .guide h1{font-size:34px;line-height:1.2;grid-column:1;letter-spacing:-.04em}
+  body:not([data-embed]):not([data-view=mobile]) .guide h1 br{display:none}
+  body:not([data-embed]):not([data-view=mobile]) .lead{margin-top:9px;font-size:13px;max-width:650px;grid-column:1}
+  body:not([data-embed]):not([data-view=mobile]) .demo-tools{grid-column:2;grid-row:1/4;align-items:center}
+  body:not([data-embed]):not([data-view=mobile]) .disclaimer{grid-column:1/-1;max-width:none;font-size:10px;margin:12px 0 0}
+  body:not([data-embed]):not([data-view=mobile]) .device{height:calc(100vh - 310px);min-height:640px;max-height:950px;max-width:none;width:100%;border-radius:24px;box-shadow:0 12px 50px #061f4b07;overflow:hidden}
+  body:not([data-embed]):not([data-view=mobile]) .device-top,body:not([data-embed]):not([data-view=mobile]) .device-bottom{display:none}
+  body:not([data-embed]):not([data-view=mobile]) .app{display:grid;grid-template-columns:320px minmax(0,1fr);padding:0;height:100%;background:var(--surface);border-radius:24px;overflow:hidden;align-items:stretch}
+  body:not([data-embed]):not([data-view=mobile]) .screen{height:100%;min-height:0;overflow:auto}
+  body:not([data-embed]):not([data-view=mobile]) .home{background:var(--bg);border-right:1px solid var(--line)}
+  body:not([data-embed]):not([data-view=mobile]) .home-banner{display:none}
+  body:not([data-embed]):not([data-view=mobile]) .home-sheet{background:transparent;border-radius:0;padding:25px 20px;min-height:0}
+  body:not([data-embed]):not([data-view=mobile]) .home-header{margin-bottom:28px}.desktop-top .profile{width:32px;height:32px}
+  body:not([data-embed]):not([data-view=mobile]) .home-header .profile{display:none}
+  body:not([data-embed]):not([data-view=mobile]) .order-card{min-height:170px;padding:20px 17px;border-radius:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);box-shadow:none}
+  body:not([data-embed]):not([data-view=mobile]) .order-card[aria-current=true]{background:var(--navy);color:white;border-color:var(--navy);box-shadow:0 8px 20px #061f4b12}
+  body:not([data-embed]):not([data-view=mobile]) .order-card h3{font-size:18px}.order-card[aria-current=true]:focus-visible{outline-offset:3px}
+  body:not([data-embed]):not([data-view=mobile]) .order-card .route{line-height:1.7;padding-right:10px;font-size:10px}
+  body:not([data-embed]):not([data-view=mobile]) .order-card .order-foot{flex-wrap:wrap;row-gap:9px;padding-top:20px}
+  body:not([data-embed]):not([data-view=mobile]) .order-card>.unread{right:14px;top:17px}
+  body:not([data-embed]):not([data-view=mobile]) .help-card{padding:19px;border:1px solid var(--line);margin-top:25px;background:transparent}
+  body:not([data-embed]):not([data-view=mobile]) .help-card h3{font-size:18px}
+  body:not([data-embed]):not([data-view=mobile]) .help-card p{font-size:11px}
+  body:not([data-embed]):not([data-view=mobile]) .home-note{font-size:9px}
+  body:not([data-embed]):not([data-view=mobile]) .detail{display:flex;flex-direction:column;position:relative;min-width:0;overflow:hidden;background:var(--surface);animation:desktop-detail .25s ease-out}
+  body:not([data-embed]):not([data-view=mobile]) .detail-header{flex-shrink:0;position:relative;background:var(--navy);padding:27px 32px 28px;min-height:190px}
+  body:not([data-embed]):not([data-view=mobile]) .detail-nav{margin-bottom:15px;justify-content:flex-start}
+  body:not([data-embed]):not([data-view=mobile]) #back{display:none}
+  body:not([data-embed]):not([data-view=mobile]) #menu-toggle{position:absolute;right:28px;top:26px}
+  body:not([data-embed]):not([data-view=mobile]) .detail-header h2{font-size:30px;padding-right:30px;margin-bottom:12px}
+  body:not([data-embed]):not([data-view=mobile]) .detail-route{font-size:12px;margin-top:13px}
+  body:not([data-embed]):not([data-view=mobile]) .offers-sheet{flex:1;overflow:auto;overscroll-behavior:contain;border-radius:0;min-height:0;padding:28px 32px 24px;animation:none}
+  body:not([data-embed]):not([data-view=mobile]) .offers-sheet>.section-line{margin-bottom:7px}
+  body:not([data-embed]):not([data-view=mobile]) .section-line h3{font-size:19px}
+  body:not([data-embed]):not([data-view=mobile]) .offer{grid-template-columns:56px minmax(0,1fr);padding:22px 0;gap:17px}
+  body:not([data-embed]):not([data-view=mobile]) .avatar{width:56px;height:62px;font-size:18px}
+  body:not([data-embed]):not([data-view=mobile]) .offer>span:last-child{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:20px}
+  body:not([data-embed]):not([data-view=mobile]) .offer-top{grid-column:1;justify-content:flex-start;gap:15px}
+  body:not([data-embed]):not([data-view=mobile]) .offer-name{font-size:14px}
+  body:not([data-embed]):not([data-view=mobile]) .offer-tags{grid-column:1;margin:6px 0 9px}
+  body:not([data-embed]):not([data-view=mobile]) .offer-price{grid-column:2;grid-row:1/3;font-size:20px;align-self:center;letter-spacing:-.04em;margin:0}
+  body:not([data-embed]):not([data-view=mobile]) .offer-bottom{grid-column:1/-1;min-width:0}
+  body:not([data-embed]):not([data-view=mobile]) .offer-message{font-size:12px}
+  body:not([data-embed]):not([data-view=mobile]) .offers-tip{padding-top:20px;font-size:13px}
+  body:not([data-embed]):not([data-view=mobile]) .status-wrap{flex-shrink:0;position:relative;left:auto;right:auto;bottom:auto;padding:15px 32px 22px;align-items:stretch;border-top:1px solid var(--line);background:var(--surface)}
+  body:not([data-embed]):not([data-view=mobile]) .status-pill{background:var(--soft);color:var(--ink);box-shadow:none;border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+  body:not([data-embed]):not([data-view=mobile]) .status-pill b{font-size:12px}
+  body:not([data-embed]):not([data-view=mobile]) .status-pill small{color:var(--muted);margin-top:3px}
+  body:not([data-embed]):not([data-view=mobile]) .status-extra{box-shadow:none}
+  body:not([data-embed]):not([data-view=mobile]) .menu-backdrop{inset:0}
+  body:not([data-embed]):not([data-view=mobile]) .order-menu{right:28px;top:70px;width:280px}
+  body:not([data-embed]):not([data-view=mobile]) .refresh-indicator{top:22px;left:274px}
+  body:not([data-embed]):not([data-view=mobile]) .refresh-indicator span{border-color:var(--line);border-top-color:var(--blue)}
+  body:not([data-embed]):not([data-view=mobile]) .refreshing .home-sheet{transform:none}
+  body:not([data-embed]):not([data-view=mobile]) .desktop-empty:not([hidden]){display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:50px;color:var(--ink)}
+  .desktop-empty img{width:220px;margin-bottom:25px}.desktop-empty h2{font-size:26px;letter-spacing:-.04em}.desktop-empty p{color:var(--muted);margin-top:14px;max-width:360px;line-height:1.8}
+  body:not([data-embed]):not([data-view=mobile]) dialog{border:1px solid var(--line);border-radius:22px;padding:28px 30px}
+  @keyframes desktop-detail{from{opacity:.4;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+}

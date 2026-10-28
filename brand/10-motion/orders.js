@@ -1,6 +1,9 @@
 (() => {
   'use strict';
   if(new URLSearchParams(location.search).get('embed')==='1') document.body.dataset.embed='true';
+  if(new URLSearchParams(location.search).get('view')==='mobile') document.body.dataset.view='mobile';
+  const desktopQuery = matchMedia('(min-width: 1000px)');
+  const isDesktop = () => desktopQuery.matches && !document.body.dataset.embed && document.body.dataset.view !== 'mobile';
   window.addEventListener('message',event=> { if(event.source===window.parent && (event.origin===location.origin || location.protocol==='file:') && event.data?.type==='gvp-theme' && ['light','dark'].includes(event.data.theme)) document.documentElement.dataset.theme=event.data.theme; });
   const $ = selector => document.querySelector(selector);
   const home = $('#home'), detail = $('#detail'), menu = $('#order-menu'), modal = $('#modal');
@@ -27,6 +30,7 @@
     $('#order-list').replaceChildren(...visible.map((order, index) => {
       const button = document.createElement('button');
       button.type = 'button'; button.className = 'order-card' + (index ? ' secondary' : '');
+      if (current?.id === order.id) button.setAttribute('aria-current','true');
       // Only fixed demo content and values assigned through the edit form are rendered.
       const heading = document.createElement('h3'); heading.textContent = order.title;
       const route = document.createElement('p'); route.className = 'route'; route.textContent = `${order.from} → ${order.to}`;
@@ -61,13 +65,39 @@
       button.innerHTML = `<span class="avatar ${person.online ? 'online' : ''}" aria-hidden="true">${person.initials}</span><span><span class="offer-top"><span class="offer-name">${person.name}</span><span class="offer-time">13:${47-index*2}</span></span><span class="offer-tags"><span class="tag star">★ ${person.rating}</span><span class="tag">${person.reviews} отзывов</span></span><span class="offer-price">${money(offerPrice(index))}</span><span class="offer-bottom"><span class="offer-message">${current.id === 2 ? 'Доставлю лично в руки. Готов выехать.' : person.message}</span>${current.unread[index] ? `<span class="unread" aria-label="Новых сообщений: ${current.unread[index]}">${current.unread[index]}</span>` : ''}</span></span>`;
       button.addEventListener('click',() => openChat(index)); return button;
     }));
+    if (isDesktop()) renderHome();
   };
-  const openOrder = order => { current = order; renderDetail(); home.hidden = true; detail.hidden = false; detail.scrollTop = 0; $('#back').focus({preventScroll:true}); };
-  const goHome = () => { closeMenu(false); detail.hidden = true; home.hidden = false; $('#status-extra').hidden = true; $('#status-toggle').setAttribute('aria-expanded','false'); renderHome(); const card = $('#order-list button'); if(card) card.focus({preventScroll:true}); else $('#refresh').focus({preventScroll:true}); };
+  const openOrder = (order, focus = true) => {
+    closeMenu(false);
+    $('#status-extra').hidden = true;
+    $('#status-toggle').setAttribute('aria-expanded','false');
+    current = order; renderDetail(); home.hidden = !isDesktop(); detail.hidden = false;
+    $('#desktop-empty').hidden = true; detail.scrollTop = 0;
+    $('.device').setAttribute('aria-label',isDesktop() ? 'Пример кабинета заказчика' : 'Пример мобильного кабинета заказчика');
+    if (focus) {
+      $('#detail-title').tabIndex = -1;
+      (isDesktop() ? $('#detail-title') : $('#back')).focus({preventScroll:true});
+    }
+  };
+  const goHome = () => {
+    closeMenu(false); detail.hidden = true; home.hidden = false;
+    $('#status-extra').hidden = true; $('#status-toggle').setAttribute('aria-expanded','false');
+    current = null; renderHome();
+    if (isDesktop()) {
+      const next = orders.find(order => !order.hidden);
+      if (next) openOrder(next, false);
+      else $('#desktop-empty').hidden = false;
+    }
+    const card = $('#order-list button'); if(card) card.focus({preventScroll:true}); else $('#refresh').focus({preventScroll:true});
+  };
   const positionModal = () => {
+    if (isDesktop()) {
+      modal.style.cssText = `position:fixed;inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:${Math.min(560,window.innerWidth-48)}px;max-height:${window.innerHeight-64}px`;
+      return;
+    }
     const rect = $('.device').getBoundingClientRect();
     const width = Math.min(rect.width-2,window.innerWidth-24);
-    modal.style.position='fixed'; modal.style.inset='auto'; modal.style.left=`${Math.max(12,Math.min(rect.left+1,window.innerWidth-width-12))}px`;
+    modal.style.transform='none'; modal.style.position='fixed'; modal.style.inset='auto'; modal.style.left=`${Math.max(12,Math.min(rect.left+1,window.innerWidth-width-12))}px`;
     modal.style.width=`${width}px`; modal.style.maxHeight=`${Math.min(650,window.innerHeight-48)}px`; modal.style.bottom=`${Math.max(18,window.innerHeight-Math.min(rect.bottom-1,window.innerHeight-18))}px`;
   };
   const openModal = (title,build) => { closeMenu(false); $('#modal-title').textContent=title; $('#modal-body').replaceChildren(); build($('#modal-body')); positionModal(); modal.showModal(); };
@@ -114,8 +144,20 @@
   home.addEventListener('touchstart',event=> { touchStart=home.scrollTop===0?event.touches[0].clientY:null; },{passive:true});
   home.addEventListener('touchend',event=> { if(touchStart!==null&&event.changedTouches[0].clientY-touchStart>65)refresh(); touchStart=null; },{passive:true});
   $('#theme').addEventListener('click',()=> { const dark=document.documentElement.dataset.theme!=='dark'; document.documentElement.dataset.theme=dark?'dark':'light'; $('#theme').textContent=dark?'Светлая тема':'Тёмная тема'; $('#theme').setAttribute('aria-pressed',String(dark)); });
-  const reset=()=> { generation++; clearTimeout(refreshTimer); if(modal.open)modal.close(); orders=initialOrders(); current=null; home.classList.remove('refreshing'); home.removeAttribute('aria-busy'); $('#refresh').disabled=false; closeMenu(false); detail.hidden=true; home.hidden=false; home.scrollTop=0; $('#status-extra').hidden=true; $('#status-toggle').setAttribute('aria-expanded','false'); renderHome(); };
+  const reset=()=> { generation++; clearTimeout(refreshTimer); if(modal.open)modal.close(); orders=initialOrders(); current=null; home.classList.remove('refreshing'); home.removeAttribute('aria-busy'); $('#refresh').disabled=false; closeMenu(false); detail.hidden=true; home.hidden=false; home.scrollTop=0; $('#desktop-empty').hidden=true; $('#status-extra').hidden=true; $('#status-toggle').setAttribute('aria-expanded','false'); renderHome(); if(isDesktop())openOrder(orders[0],false); };
   $('#reset').addEventListener('click',()=> { reset(); toast('Можно пройти сценарий заново'); });
   $('#empty-reset').addEventListener('click',()=> { reset(); toast('Демо-заказы восстановлены'); });
+  desktopQuery.addEventListener('change',()=> {
+    closeMenu(false);
+    if (isDesktop()) {
+      const order = current || orders.find(item => !item.hidden);
+      if (order) openOrder(order,false);
+      else { home.hidden=false; $('#desktop-empty').hidden=false; }
+    } else {
+      home.hidden=!!current; detail.hidden=!current; $('#desktop-empty').hidden=true;
+      $('.device').setAttribute('aria-label','Пример мобильного кабинета заказчика');
+    }
+    if (modal.open) positionModal();
+  });
   reset();
 })();
