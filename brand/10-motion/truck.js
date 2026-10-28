@@ -114,6 +114,13 @@
     });
     updateButton(card);
   });
+  // Freeze offscreen scenes without changing the user's pause preference.
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { entry.target.dataset.dormant = String(!entry.isIntersecting); });
+    });
+    cards.filter(card => card.isConnected).forEach(card => observer.observe(card));
+  }
   reducedMotion.addEventListener('change', () => {
     cards.filter(card => card.isConnected).forEach(updateButton);
   });

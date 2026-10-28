@@ -202,3 +202,32 @@
   .gvp-motion-header { margin-bottom: 36px; }
   .gvp-motion-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
 }
+/* Motion refinement: a steady, careful journey. Road speed is 72 SVG units/s;
+   tire radius 18 × vehicle scale 1.7 gives a 192.27-unit circumference. */
+.gvp-truck { --gvp-road-cycle: 1.666667s; --gvp-wheel-cycle: 2.670354s; }
+.gvp-truck__body {
+  transform-origin: 100px 92px;
+  animation: gvp-truck-suspension 3.6s ease-in-out infinite;
+}
+.gvp-truck__spokes { animation-duration: var(--gvp-wheel-cycle); }
+.gvp-truck__road { animation-duration: var(--gvp-road-cycle); stroke-width: 2; opacity: .65; }
+.gvp-truck__speed { display: none; }
+.gvp-city-skyline { opacity: .65; animation-duration: 75s; }
+.gvp-city-pass { opacity: .52; animation-duration: 40s; animation-delay: -15.3s; }
+.gvp-truck__shadow { fill: var(--gvp-deep); opacity: .11; }
+.gvp-truck[data-theme='dark'] .gvp-truck__shadow { fill: #000; opacity: .25; }
+.gvp-city-clouds { fill: var(--gvp-city-window); opacity: .6; animation: gvp-cloud-drift 120s linear infinite; }
+.gvp-truck[data-theme='dark'] .gvp-city-clouds { opacity: .08; }
+.gvp-truck[data-dormant='true'] * { animation-play-state: paused !important; }
+@keyframes gvp-truck-suspension {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  20% { transform: translateY(.65px) rotate(.12deg); }
+  43% { transform: translateY(-.4px) rotate(-.1deg); }
+  65% { transform: translateY(.45px) rotate(.08deg); }
+  82% { transform: translateY(-.2px) rotate(-.06deg); }
+}
+@keyframes gvp-cloud-drift { from { transform: translateX(0); } to { transform: translateX(-720px); } }
+@media (prefers-reduced-motion: reduce) {
+  .gvp-truck * { animation: none !important; }
+  .gvp-city-pass { transform: translateX(350px); }
+}

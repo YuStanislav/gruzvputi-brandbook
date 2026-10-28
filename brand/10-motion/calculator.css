@@ -1,0 +1,41 @@
+/* Calculator storyboard: an isolated, illustrative demo, not a live quote. */
+.gvp-calc { margin-top:64px; color:#061f4b; }
+.gvp-calc h2 { margin:0; font-size:clamp(28px,4vw,42px); letter-spacing:-.04em; line-height:1.15; }
+.gvp-calc__intro { color:#52627c; line-height:1.65; max-width:650px; }
+.gvp-calc__panel { display:grid; grid-template-columns: minmax(250px,.85fr) minmax(0,1.6fr); border:1px solid #dbe4f2; border-radius:24px; background:#fff; overflow:hidden; margin-top:24px; }
+.gvp-calc__steps { padding:28px; display:grid; align-content:center; gap:10px; border-right:1px solid #e6edf7; }
+.gvp-calc__step { display:flex; gap:14px; align-items:center; text-align:left; border:1px solid transparent; border-radius:14px; background:transparent; padding:14px; cursor:pointer; color:#52627c; font:inherit; }
+.gvp-calc__number { display:grid; place-items:center; width:34px; height:34px; flex-shrink:0; border:1px solid #dbe4f2; border-radius:50%; font-size:13px; font-weight:800; }
+.gvp-calc__step strong { display:block; font-size:14px; }
+.gvp-calc__step small { display:block; margin-top:4px; font-size:11px; line-height:1.5; }
+.gvp-calc__step[aria-current='step'] { background:#edf4ff; color:#061f4b; border-color:#d4e5ff; }
+.gvp-calc__step[aria-current='step'] .gvp-calc__number { background:#0066ff; border-color:#0066ff; color:#fff; }
+.gvp-calc button:focus-visible { outline:3px solid #6babff; outline-offset:3px; }
+.gvp-calc__visual { padding:28px; min-width:0; background:linear-gradient(145deg,#fff,#f4f7fc); }
+.gvp-calc__scene { display:block; width:100%; height:auto; }
+.gvp-calc__base { fill:none; stroke:#e1e9f5; stroke-width:2; }
+.gvp-calc__route { fill:none; stroke:#0066ff; stroke-width:4; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1); }
+.gvp-calc[data-step='1'] .gvp-calc__route,.gvp-calc[data-step='2'] .gvp-calc__route,.gvp-calc[data-step='3'] .gvp-calc__route { stroke-dashoffset:0; }
+.gvp-calc__marker { fill:#fff; stroke:#0066ff; stroke-width:3; }
+.gvp-calc__label { fill:#061f4b; font:700 13px 'GVP Manrope',sans-serif; }
+.gvp-calc__micro { fill:#52627c; font:500 10px 'GVP Manrope',sans-serif; }
+.gvp-calc__vehicle { opacity:0; transform:translateX(-16px); transition:opacity .5s,transform .8s cubic-bezier(.22,1,.36,1); }
+.gvp-calc[data-step='2'] .gvp-calc__vehicle,.gvp-calc[data-step='3'] .gvp-calc__vehicle { opacity:1; transform:translateX(0); }
+.gvp-calc__quote { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:20px; min-height:92px; border:1px solid #dbe4f2; border-radius:16px; background:#fff; }
+.gvp-calc__status { font-size:13px; font-weight:700; line-height:1.5; }
+.gvp-calc__price { opacity:0; transform:translateY(8px); font-size:28px; font-weight:800; white-space:nowrap; transition:opacity .4s,transform .6s; }
+.gvp-calc[data-step='3'] .gvp-calc__price { opacity:1; transform:translateY(0); }
+.gvp-calc__actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:18px; }
+.gvp-calc__actions button { border:1px solid #dbe4f2; border-radius:10px; padding:11px 16px; font:700 12px 'GVP Manrope',sans-serif; background:#fff; color:#061f4b; cursor:pointer; }
+.gvp-calc__actions button:first-child { background:#0066ff; border-color:#0066ff; color:white; }
+.gvp-calc__note { color:#52627c; font-size:11px; line-height:1.6; }
+.gvp-motion-page[data-embed='true'] .gvp-calc { display:none; }
+@media(max-width:760px) { .gvp-calc__panel { grid-template-columns:1fr; } .gvp-calc__steps { padding:16px; grid-template-columns:1fr 1fr; border-right:0; border-bottom:1px solid #e6edf7; gap:4px; } .gvp-calc__step { padding:10px; gap:8px; } .gvp-calc__step small { display:none; } .gvp-calc__visual { padding:16px; } .gvp-calc__price { font-size:23px; } }
+@media(prefers-reduced-motion:reduce) { .gvp-calc * { transition:none!important; animation:none!important; } }
+@media(max-width:760px) {
+  .gvp-calc__steps { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .gvp-calc__step { min-width:0; font-size:12px; }
+  .gvp-calc__number { width:28px; height:28px; font-size:11px; }
+  .gvp-calc__step strong { font-size:12px; }
+  .gvp-calc__quote { padding:14px; }
+}
