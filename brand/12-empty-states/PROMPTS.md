@@ -1,5 +1,26 @@
 # Промпты иллюстраций
 
+
+## Уточнение маршрута по фирменному баннеру
+
+undefined
+
+## Коррекция масштаба и пропорций — 30 октября 2026
+
+Режим: встроенный image_gen, редактирование PNG с сохранением прозрачности. Эталон масштаба — первоначальный searching.png; эталон персонажа и толщины синих штрихов — официальный mascot-640.png.
+
+### searching.png
+
+Edit image 1 with a precise minimal change. Keep its husky, size, anatomy, parcel, pose, layout, colors and transparent canvas unchanged. Only make the blue dotted route ahead of the parcel and its endpoint pin substantially thinner: reduce stroke width by about 45 percent, rounded crisp blue marks, remove heavy glow around route. Image 2 is the official homepage mascot reference: match the light weight of its blue motion strokes at equivalent displayed scale. Preserve opaque white dog markings and genuine transparent background. Do not enlarge the dog. Output same 1536x1024 composition.
+
+### cancelled.png
+
+Edit image 1 (resting husky, parcel and minus marker). Image 2 SEARCHING is the exact character scale and anatomy reference; image 3 is official logo mascot. Make the resting husky visibly smaller and leaner, especially reduce oversized head by approximately 30%, use image 2 adult narrow muzzle, pointed ears, athletic body and small paws. Match absolute head size of image 2 on the same 1536x1024 canvas, not a puppy. Keep relaxed sphinx lying pose, blue parcel and small stop symbol. More transparent breathing space above dog. No extra objects, no text. Crisp flat navy #061F4B, electric blue #0066FF, opaque white markings. Transparent background. Preserve scene meaning and canvas dimensions; no glow.
+
+### expired.png
+
+Edit image 1 (sitting husky, clock and parcel). Image 2 SEARCHING is the exact character size and proportions reference; image 3 is official logo mascot. Make sitting husky visibly smaller, leaner and less chunky. Reduce oversized head by approximately 30%, match absolute head size of image 2 on the same 1536x1024 canvas: same narrow adult muzzle, pointed ears and athletic adult anatomy. Keep sitting pose looking calmly at clock, same clock and blue parcel. Leave more transparent breathing room above the dog; reduce dog overall about 20%. No text, no extra objects. Crisp flat navy #061F4B, electric blue #0066FF and opaque white markings. Fully transparent background, no glow. Preserve canvas dimensions and scene meaning.
+
 Созданы встроенным инструментом image_gen с прозрачным фоном. Референс персонажа: `../01-mascot/light/mascot-640.png`. Исходный мастер маскота не изменён.
 
 ## Поиск исполнителя — searching.png

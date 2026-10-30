@@ -25,7 +25,7 @@
     const state = states[status]; if (!state) return null;
     const root = document.createElement('section');root.className='gvp-empty-response';root.dataset.state=status;
     const id=`empty-response-title-${++sequence}`;root.setAttribute('aria-labelledby',id);
-    const image=document.createElement('img');image.className='gvp-empty-response__image';image.src=`../12-empty-states/${state.image}`;image.alt='';image.width=384;image.height=256;image.decoding='async';root.append(image);
+    const image=document.createElement('img');image.className='gvp-empty-response__image';image.src=`../12-empty-states/${state.image}?v=2`;image.alt='';image.width=384;image.height=256;image.decoding='async';root.append(image);
     const content=document.createElement('div');content.className='gvp-empty-response__content';
     const title=document.createElement('h3');title.id=id;title.textContent=state.title;
     const text=document.createElement('p');text.textContent=state.text;
