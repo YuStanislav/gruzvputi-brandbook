@@ -1,5 +1,13 @@
 # Промпты иллюстраций
 
+## Принятый финальный проход: тонкие короткие штрихи
+
+Edit only the blue dashed route of supplied image. Make the route very fine, 1px thin at full 1536px image width. Replace long rectangular dashes with very short 1px fine dash specks separated by 6px gaps, about50 specks along same curve. It must look like a fine hairline dotted UI route, not bold dots. Preserve blue circle and map pin. Preserve dog and parcel exactly. NO glow, NO halo, NO luminous outline, NO change to dog silhouette or markings, NO shadows, do not add anything. Flat opaque shapes on genuine transparent background. Same1536x1024 composition. Only route dashes become thinner and shorter.
+
+## Финальный эталон — HeroArt главной страницы, короткий пунктир 2/9
+
+undefined
+
 ## Финальное уточнение: тоньше линия, возврат кольца и метки
 
 undefined
