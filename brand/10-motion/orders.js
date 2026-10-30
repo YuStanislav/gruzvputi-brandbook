@@ -52,9 +52,11 @@
   };
   const offerPrice = index => current.id === 2 ? [700,900,800][index] : people[index].price;
   const renderDetail = () => {
-    const cancelled = current.count === 0;
-    $('.live-label').textContent = cancelled ? 'Завершён' : 'На связи';
-    $('.published i').hidden = cancelled;
+    const emptyStatus = current.emptyState || (current.status === 'Заказ отменён' ? 'CANCELLED' : null);
+    const cancelled = emptyStatus === 'CANCELLED';
+    const expired = emptyStatus === 'EXPIRED';
+    $('.live-label').textContent = cancelled ? 'Отменён' : expired ? 'Срок истёк' : current.count === 0 ? 'Ожидаем отклики' : 'На связи';
+    $('.published i').hidden = cancelled || expired;
     $('.offers-tip b').textContent = cancelled ? 'Этот заказ отменён' : 'Выберите своего попутчика';
     $('.offers-tip p').textContent = cancelled ? 'Нажмите «Начать заново», чтобы восстановить пример.' : 'Откройте предложение, чтобы обсудить время и детали перевозки.';
     $('#status-extra > b').textContent = cancelled ? 'Заказ снят с публикации' : 'Заказ виден перевозчикам';
@@ -70,6 +72,21 @@
       button.innerHTML = `<span class="avatar ${person.online ? 'online' : ''}" aria-hidden="true">${person.initials}</span><span><span class="offer-top"><span class="offer-name">${person.name}</span><span class="offer-time">13:${47-index*2}</span></span><span class="offer-tags"><span class="tag star">★ ${person.rating}</span><span class="tag">${person.reviews} отзывов</span></span><span class="offer-price">${money(offerPrice(index))}</span><span class="offer-bottom"><span class="offer-message">${current.id === 2 ? 'Доставлю лично в руки. Готов выехать.' : person.message}</span>${current.unread[index] ? `<span class="unread" aria-label="Новых сообщений: ${current.unread[index]}">${current.unread[index]}</span>` : ''}</span></span>`;
       button.addEventListener('click',() => openChat(index)); return button;
     }));
+    document.querySelector('#offers-empty-state')?.remove();
+    $('.offers-tip').hidden = current.count === 0;
+    if (current.count === 0 && emptyStatus && window.GVPEmptyResponses) {
+      const empty = window.GVPEmptyResponses.create(emptyStatus, {onAction: action => {
+        if(action === 'details') actions.details();
+        else openModal(action === 'copy' ? 'Создать похожий заказ' : 'Повторить заказ', body => {
+          paragraph(body,'Маршрут и параметры груза можно перенести в новый заказ. Дату, время и цену нужно проверить заново.');
+          paragraph(body,'Это пример следующего шага. Новый заказ не публикуется.');
+          actionButton(body,'Понятно',()=>modal.close());
+        });
+      }});
+      if (empty) { empty.id='offers-empty-state'; $('#offers').after(empty); }
+      $('#status-extra > b').textContent = cancelled ? 'Заказ отменён вами' : expired ? 'Срок заказа истёк' : 'Заказ опубликован';
+      $('#status-extra > p').textContent = window.GVPEmptyResponses.states[emptyStatus].text;
+    }
     persist();
   };
   const openOrder = (order, focus = true) => {
@@ -126,7 +143,7 @@
     details: () => openModal('Детали заказа',body => { const list=document.createElement('dl'); list.className='detail-list'; [['Откуда',current.from],['Куда',current.to],['Груз',current.cargo],['Когда','Сегодня, с 15:00 до 18:00'],['Ваша цена',money(current.price)]].forEach(([label,value]) => { const dt=document.createElement('dt'),dd=document.createElement('dd'); dt.textContent=label; dd.textContent=value; list.append(dt,dd); }); body.append(list); }),
     edit: () => openModal('Изменить заказ',body => { const form=document.createElement('form'); const title=field(form,'Название',current.title),from=field(form,'Откуда',current.from),to=field(form,'Куда',current.to); const submit=document.createElement('button'); submit.className='primary'; submit.textContent='Сохранить в прототипе'; form.append(submit); body.append(form); form.addEventListener('submit',event => { event.preventDefault(); if(![title,from,to].every(input=>input.value.trim()))return; current.title=title.value.trim(); current.from=from.value.trim(); current.to=to.value.trim(); renderDetail(); modal.close(); toast('Изменения сохранены в этом примере'); }); }),
     support: () => openModal('Мы рядом',body => { paragraph(body,'Если изменились планы, откройте меню заказа и обновите детали. Вопросы по времени и погрузке можно обсудить с перевозчиком в чате.'); paragraph(body,'Это пример экрана поддержки. Обращение в реальную службу не создаётся.'); actionButton(body,'Понятно',()=>modal.close()); }),
-    cancel: () => openModal('Отменить заказ?',body => { paragraph(body,'В прототипе заказ получит статус «Отменён», а новые отклики будут скрыты. Кнопка «Начать заново» восстановит исходный пример.'); actionButton(body,'Отменить заказ',()=> { current.status='Заказ отменён'; current.count=0; current.unread=[]; renderDetail(); modal.close(); toast('Заказ отменён только в прототипе'); },'primary cancel-button'); actionButton(body,'Продолжить поиск',()=>modal.close(),'secondary-button'); })
+    cancel: () => openModal('Отменить заказ?',body => { paragraph(body,'В прототипе заказ получит статус «Отменён», а новые отклики будут скрыты. Кнопка «Начать заново» восстановит исходный пример.'); actionButton(body,'Отменить заказ',()=> { current.status='Заказ отменён'; current.emptyState='CANCELLED'; current.count=0; current.unread=[]; renderDetail(); modal.close(); toast('Заказ отменён только в прототипе'); },'primary cancel-button'); actionButton(body,'Продолжить поиск',()=>modal.close(),'secondary-button'); })
   };
   $('#menu-toggle').addEventListener('click',()=> { const open=menu.hidden; menu.hidden=!open; $('#menu-backdrop').hidden=!open; $('#menu-toggle').setAttribute('aria-expanded',String(open)); if(open) menu.querySelector('button').focus(); });
   $('#menu-backdrop').addEventListener('click',()=>closeMenu());
@@ -151,7 +168,16 @@
     const dark=document.documentElement.dataset.theme==='dark'; $('#theme').textContent=dark?'Светлая тема':'Тёмная тема'; $('#theme').setAttribute('aria-pressed',String(dark));
     $('.device').setAttribute('aria-label',isDesktop()?'Пример кабинета заказчика':'Пример мобильного кабинета заказчика');
     home.classList.remove('refreshing'); home.removeAttribute('aria-busy'); $('#refresh').disabled=false; closeMenu(false); detail.hidden=true; home.hidden=false; home.scrollTop=0; $('#desktop-empty').hidden=true; $('#status-extra').hidden=true; $('#status-toggle').setAttribute('aria-expanded','false'); renderHome();
-    if(isOrderPage) { const id=Number(new URLSearchParams(location.search).get('id')); openOrder(orders.find(order=>order.id===id)||orders[0],false); }
+    if(isOrderPage) {
+      const params=new URLSearchParams(location.search),id=Number(params.get('id'));
+      const storedOrder=orders.find(order=>order.id===id)||orders[0];
+      const order=params.has('empty')?{...storedOrder}:storedOrder;
+      const empty=params.get('empty');
+      if (window.GVPEmptyResponses && Object.hasOwn(window.GVPEmptyResponses.states,empty)) {
+        order.count=0;order.unread=[];order.emptyState=empty;order.status=window.GVPEmptyResponses.states[empty].label;
+      }
+      openOrder(order,false);
+    }
   };
   $('#reset').addEventListener('click',()=> { reset(); toast('Можно пройти сценарий заново'); });
   $('#empty-reset').addEventListener('click',()=> { reset(); toast('Демо-заказы восстановлены'); });

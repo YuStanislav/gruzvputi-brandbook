@@ -1,0 +1,14 @@
+.gvp-empty-response{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 20px 38px;min-height:390px;color:var(--ink,#061f4b)}
+.gvp-empty-response__image{display:block;width:min(280px,80%);height:185px;object-fit:contain;margin:0 auto 19px;flex-shrink:0}
+.gvp-empty-response__content{max-width:440px;min-width:0}
+.gvp-empty-response h3{font:800 25px/1.2 Manrope,system-ui,sans-serif;letter-spacing:-.04em;margin:0 0 13px}
+.gvp-empty-response p{font:400 13px/1.85 Manrope,system-ui,sans-serif;color:var(--muted,#63738b);margin:0 auto;max-width:390px}
+.gvp-empty-response__actions{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:23px}
+.gvp-empty-response__primary{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 20px;background:#0066ff;color:white;border:1px solid #0066ff;border-radius:12px;cursor:pointer;font:700 12px/1.5 Manrope,system-ui,sans-serif}
+.gvp-empty-response__actions a{font:700 11px/1.6 Manrope,system-ui,sans-serif;color:var(--muted,#63738b);text-decoration:none;padding:5px}
+.gvp-empty-response__actions a:hover{color:var(--ink,#061f4b);text-decoration:underline;text-underline-offset:4px}
+.gvp-empty-response button:focus-visible,.gvp-empty-response a:focus-visible{outline:3px solid #6babff;outline-offset:4px}
+.gvp-empty-response[data-state=CANCELLED] .gvp-empty-response__primary{background:var(--soft,#edf4ff);color:var(--ink,#061f4b);border-color:var(--line,#e2eaf5)}
+.offers-sheet:has(.gvp-empty-response){padding-bottom:115px}
+@media(min-width:1000px){body:not([data-embed]):not([data-view=mobile]) .gvp-empty-response{min-height:400px;padding:32px 24px 45px}body:not([data-embed]):not([data-view=mobile]) .offers-sheet:has(.gvp-empty-response){padding-bottom:28px}.gvp-empty-response__image{width:300px;height:200px}}
+@media(max-width:480px){.gvp-empty-response{padding:22px 8px 28px;min-height:375px}.gvp-empty-response__image{width:240px;height:160px;margin-bottom:17px}.gvp-empty-response h3{font-size:22px}.gvp-empty-response p{font-size:12px}.gvp-empty-response__primary{font-size:12px;max-width:100%;width:100%}.gvp-empty-response__actions{gap:11px}.gvp-empty-response__content{width:100%}}

@@ -2,6 +2,8 @@
 
 ## Что посмотреть
 
+- [Заказ без откликов: три статуса](https://yustanislav.github.io/gruzvputi-brandbook/brand/10-motion/empty-responses.html): отдельные иллюстрации, тексты, действия и сравнение мобильного/десктопного вида. [Правила реализации и PNG](brand/12-empty-states/README.md), [промпты иллюстраций](brand/12-empty-states/PROMPTS.md).
+
 - [Брендбук](https://yustanislav.github.io/gruzvputi-brandbook/).
 - [Заказы и отклики](https://yustanislav.github.io/gruzvputi-brandbook/brand/10-motion/orders.html): интерактивный прототип по референсам пользователя, в стилистике «Груз в пути».
 - [Калькулятор](https://yustanislav.github.io/gruzvputi-brandbook/brand/10-motion/truck.html#calculator-motion): адреса → маршрут → машина → пример цены.
